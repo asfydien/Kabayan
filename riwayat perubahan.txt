@@ -1,0 +1,56 @@
+ Kabayan
+	
+ http://code.google.com/p/kabayan/
+ ---------------------------------
+
+ Riwayat perubahan
+
+ Kabayan 0.1.6
+ - Improved DList
+ - Improved KanvasCari
+ * ?
+
+ Kabayan 0.1.5
+ + update kosakata Indonésia-Sunda
+ * mengoptimalkan resposifitas pada HP ukuran layar 128x...
+
+ Kabayan 0.1.4
+ + ukuan huruf menyesuaikan pada layar 240x240 keatas
+ + mengganti class DiskManager ku DiskMan yang lebih fleksibel (eksperimen)
+ + mengelompokan fungsi pengaturan pada satu kanvas (ekperimen)
+ + menambahkan menu pada kanvas pencarian
+ + memudahkan berpindah kamus pada kanvas pencarian
+ + menambahkan fungsi pengaturan ukuran huruf
+ + penambahan/memperbaiki kosakata Sunda-Indonésia
+ * merapihkan posisi huruf dan garis
+ * mengaktifkan kembali fungsi "\n"
+
+ Kabayan 0.1.3.1 
+ * perbaikan eksepsi yang menyebabkan tidak bisa jalan di beberapa jenis HP
+ * merombak beberapa class
+
+ Kabayan 0.1.3
+ * ?
+
+ Kabayan 0.1.2
+ + dapat menampilkan karakter khusus seperti 'é' di List dengan tetap menggunakan karakter normal 'e' sebagai pencariannya
+ + menambah scrollbar pada DLits
+ * pemggabung beberapa class jadi satu (DictionaryCanvas, InterfaceCanvas dan KeyboardCanvas)
+ * merancang ulang struktur kamus Sunda-Indonésia
+ * memperbaiki menu utama tidak menampilkan "keluar"
+ * perbaikan tampilan GUI
+
+ Kabayan 0.1.1
+ + penambahan kosakata baru Sunda-Indonésia
+ + menambah kamus Indonésia-Sunda
+ + menggunakan karakter ';' untuk mendukung baris baru pada layar bantuan
+ + menambahkan konfigurasi keyboard untuk mendukung penulisan bahasa sunda
+ + menambah tombol "Lihat" pengganti "Cari Kata" pada layar pencarian
+ * mengganti karakter '\n' dengan ';' untuk menghindari kesalahan dalam pembuatan indek
+
+ Kabayan 0.1
+ + menambah kamus Sunda-Indonésia
+ * desain ulang menu navigator
+ * desain ulang DList, DTextField, layar hasil
+ * mengganti warna tema jadi hijau
+ * menggati bahasa bawaan menjadi bahasa Indonésia

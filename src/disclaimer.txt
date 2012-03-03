@@ -1,0 +1,28 @@
+DISCLAIMER
+----------
+
+Dalam proyek ini data kamus diambil dari beberapa referensi diantaranya:
+
+  Buku KAMUS KECIL SUNDA-INDONESIA cetakan tahun 1986
+  Penyusun M.O. KUESMAN, penerbit TARATE BANDUNG
+
+  Loka Tarjamah Otomatis Indonésia-Sunda (LTIS)
+  http://tarjamah.sabilulungan.org/
+  http://code.google.com/p/ltis/
+
+  KASKUS: Hayu Urang Mumule Basa Karuhun
+  http://kask.us/5180008
+
+  Kamus Bahasa Sunda (Online)
+  http://www.kamusbahasasunda.com/
+
+  * Karmix (Kabayan Remix):
+    http://gkamus.sourceforge.net/
+    http://steven.blogs.masterweb.net/2009/05/21/kbbi-versi-stardict/
+
+proyek ini hayalah sebuah sarana belajar tidak ada unsur komersial, jika
+ada pihak yang berkeberatan dengan dimuatnya beberapa sumber kedalam proyek
+ini silahkan kontak untuk dihapus.
+
+
+Surélék: kicksuid<at>gmail.com
