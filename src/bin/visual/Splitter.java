@@ -22,7 +22,7 @@ import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.Font;
 import java.util.Vector;
 
-public class TukangNyacag {
+public class Splitter {
     
     public class Cacagan // <# ieu teh struct di c# mah
     {

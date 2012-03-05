@@ -54,7 +54,7 @@ public class KanvasCari extends Canvas implements CommandListener {
     
     private String teksQuick = "", stxtCari = "";
     
-    private TukangNyacag tn = new TukangNyacag();
+    private Splitter tn = new Splitter();
     
     private long tick;
     
@@ -333,7 +333,7 @@ public class KanvasCari extends Canvas implements CommandListener {
 
         if (lstResults.content!=null)
             try{
-                TukangNyacag.Cacagan[] hasil = tn.cacag(huruf, teksQuick, getWidth()-12, false, 20, maxBaris);
+                Splitter.Cacagan[] hasil = tn.cacag(huruf, teksQuick, getWidth()-12, false, 20, maxBaris);
                 tn.tulis(g, huruf, hasil, 6, yQuick+3, 0, maxBaris, 0x000000);
             } catch (Exception ex) {}
     }

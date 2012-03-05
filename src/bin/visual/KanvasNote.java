@@ -32,7 +32,7 @@ public class KanvasNote extends Canvas  implements CommandListener {
     private String teksJudul, teksIsi;
     private Kabayan midlet;
     private Command cmdKembali, cmdZoom;
-    private TukangNyacag tn = new TukangNyacag();
+    private Splitter tn = new Splitter();
     private String oldJudul="";
     private Displayable dKembali;
     
@@ -52,7 +52,7 @@ public class KanvasNote extends Canvas  implements CommandListener {
     //private FontBox fontbox;
     private FontBox fontbox;
 
-    private TukangNyacag.Cacagan[] hasil;
+    private Splitter.Cacagan[] hasil;
     
     public void setWarna(int clHeadTeks, int clHead, int clShadow1, int clShadow2, int clShadow3, int clTeks, int clFill, int clLine){
         this.clHeadTeks = clHeadTeks;

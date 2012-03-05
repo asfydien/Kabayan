@@ -23,7 +23,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.util.Vector;
-import javax.microedition.midlet.MIDlet;
+//import javax.microedition.midlet.MIDlet;
 //import javax.microedition.lcdui.Graphics;
 //import javax.microedition.lcdui.Font;
 //import java.util.Hashtable;
@@ -33,7 +33,7 @@ public class Config {
     String diccionario; //El nombre del diccioniario seleccionado
     String[] keys = {"-_@", "abc", "defé", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"}; // <# key anu tiasa digunakeun, pake sunda aksen (é)
     String selectedKeyboard;
-    String[] palabras = {"Cari Kata", "Daftar Kamus", "Keluar", "Bantuan", "Tombol", "Kembali", "Setuju", "Tidak Ditemukan", "Bahasa", "!Menu !Utama: \\n*2 NAIK \\n*8 TURUN \\n*5 PILIH\\n!Pencarian: \\n** HAPUS \\n*0 NAIK \\n*\\u0023 TURUN", "Ihwal", "Lihat", "OK", "Batal", "Pilih", "Selesai", "Konfigurasi", "Tema", "Ganti Kamus", "Ke Menu Utama", "Kecil", "Sedang", "Besar", "Translate*"};
+    String[] words = {"Cari Kata", "Daftar Kamus", "Keluar", "Bantuan", "Tombol", "Kembali", "Setuju", "Tidak Ditemukan", "Bahasa", "!Menu !Utama: \\n*2 NAIK \\n*8 TURUN \\n*5 PILIH\\n!Pencarian: \\n** HAPUS \\n*0 NAIK \\n*\\u0023 TURUN", "Ihwal", "Lihat", "OK", "Batal", "Pilih", "Selesai", "Konfigurasi", "Tema", "Ganti Kamus", "Ke Menu Utama", "Kecil", "Sedang", "Besar", "Translate*"};
     String language; //el idioma seleccionado
     DiskMan disk;
     String encoding;
@@ -310,7 +310,7 @@ public class Config {
         try {
             w = getValuesOfKey(lang, "interface");
             if (w.length > 0)
-                palabras = w;
+                words = w;
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -337,7 +337,7 @@ public class Config {
     public String getWord(String s){
                 
         for (int i=0; i<langKey.length; i++)
-            if (langKey[i].equals(s)) return palabras[i];
+            if (langKey[i].equals(s)) return words[i];
         
         return null;
         
