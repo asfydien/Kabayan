@@ -203,9 +203,9 @@ public class KanvasMenu extends Canvas implements CommandListener {
         
         g.setFont(huruf);
         g.setColor(clTagAtas);
-        g.drawString("Kabayan 0.1.6", xCenter, 12, g.TOP | g.HCENTER);
+        g.drawString(midlet._NAMAVERSI, xCenter, 12, g.TOP | g.HCENTER);
         g.setColor(clTagBawah);
-        g.drawString("- hurip sunda -", xCenter, getHeight() - huruf.getHeight() - 7 , g.TOP | g.HCENTER);
+        g.drawString(midlet._LABELBOTTOM, xCenter, getHeight() - huruf.getHeight() - 7 , g.TOP | g.HCENTER);
         
         g.setFont(hurufSel);
 
