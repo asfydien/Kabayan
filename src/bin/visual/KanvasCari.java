@@ -22,6 +22,7 @@ import bin.logic.Keyboard;
 import bin.logic.ThrdPencari;
 import javax.microedition.lcdui.*;
 import bin.logic.Kabayan;
+import java.util.Vector;
 
 public class KanvasCari extends Canvas implements CommandListener {
     
@@ -329,12 +330,12 @@ public class KanvasCari extends Canvas implements CommandListener {
         int seper3 = getHeight()/3;
         int yQuick = (seper3*2) + 3;
         int hQuick = getHeight() - yQuick - 2; 
-        int maxBaris = (hQuick-4)/huruf.getHeight();
+        int maxLine = (hQuick-4)/huruf.getHeight();
 
         if (lstResults.content!=null)
             try{
-                Splitter.Cacagan[] hasil = tn.cacag(huruf, teksQuick, getWidth()-12, false, 20, maxBaris);
-                tn.tulis(g, huruf, hasil, 6, yQuick+3, 0, maxBaris, 0x000000);
+                Vector hasil = tn.cacag(huruf, teksQuick, getWidth()-12, false, 20, maxLine);
+                tn.tulis(g, huruf, hasil, 6, yQuick+3, 0, maxLine, 0x000000);
             } catch (Exception ex) {}
     }
 

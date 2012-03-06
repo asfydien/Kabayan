@@ -25,6 +25,7 @@ import javax.microedition.lcdui.Displayable;
 import javax.microedition.lcdui.Font;
 import javax.microedition.lcdui.Graphics;
 import bin.logic.Kabayan;
+import java.util.Vector;
 
 public class KanvasNote extends Canvas  implements CommandListener {
     
@@ -52,7 +53,7 @@ public class KanvasNote extends Canvas  implements CommandListener {
     //private FontBox fontbox;
     private FontBox fontbox;
 
-    private Splitter.Cacagan[] hasil;
+    private Vector hasil;
     
     public void setWarna(int clHeadTeks, int clHead, int clShadow1, int clShadow2, int clShadow3, int clTeks, int clFill, int clLine){
         this.clHeadTeks = clHeadTeks;
@@ -206,7 +207,7 @@ public class KanvasNote extends Canvas  implements CommandListener {
    
         // tulis isi note
         if (teksIsi!=null && teksIsi.length()>0 )
-        tulisIsi(g, huruf, teksIsi, startY );
+        tulisIsi(g, huruf, startY );
         
         // ngadamel kotak zoom
         if (bZoom & getWidth() >= minWidth)
@@ -227,9 +228,10 @@ public class KanvasNote extends Canvas  implements CommandListener {
         repaint();
     }
     
-    private void tulisIsi(Graphics g, Font font, String s, int y){
+    private void tulisIsi(Graphics g, Font font, int y){
         
-        jmlBaris=hasil[hasil.length-1].baris;
+        Splitter.Cacagan cn = (Splitter.Cacagan)hasil.elementAt(hasil.size()-1);
+        jmlBaris = cn.baris;
         
         maxBaris = (getHeight()-y)/font.getHeight();
         
