@@ -231,7 +231,7 @@ public class KanvasNote extends Canvas  implements CommandListener {
     private void tulisIsi(Graphics g, Font font, int y){
         
         Splitter.Cacagan cn = (Splitter.Cacagan)hasil.elementAt(hasil.size()-1);
-        jmlBaris = cn.baris;
+        jmlBaris = cn.line;
         
         maxBaris = (getHeight()-y)/font.getHeight();
         

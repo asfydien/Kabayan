@@ -41,8 +41,10 @@ public class Pencari {
         StringBuffer reading = new StringBuffer(7);
         int ch = 0;
         idx_file = index_file; // <# awal nama
+        
         InputStream is = this.getClass().getResourceAsStream("/" + index_file);
         InputStreamReader ir;
+        
         try {
             ir = new InputStreamReader(is, encoding);
         } catch (UnsupportedEncodingException ex) {
@@ -62,7 +64,9 @@ public class Pencari {
                 }
             }
          }
-         ir.close();
+         
+        ir.close();
+        
         if (reading.length() > 0){
              v.addElement(reading.toString());
         }
@@ -119,8 +123,8 @@ public class Pencari {
         
         
         String ini="";
-        String [] r1 = null;
-        String [] r2 = null;
+        String[] r1 = null;
+        String[] r2 = null;
         
         if (s!=null | s.equals("")==false) {
             int mulai = getStartIdx(s);
@@ -148,7 +152,7 @@ public class Pencari {
                         }
                         //return search(s, index[i][2]);
                     } catch (IOException ex) {
-                        ex.printStackTrace();
+                        //ex.printStackTrace();
                     }
                 }
             }
@@ -190,19 +194,21 @@ public class Pencari {
                             if (word.compareTo(reading.toString().substring(0, word.length())) == 0){
                                 words.addElement(reading.toString());
                                 found ++;
-                                if (found==records_to_return)
-                                    break;
+                                
+                                if (found==records_to_return) break;
                             }
                         wordList = true;
                     }
                 }
             }
         }         
+        
         is.close();
         
         String wrds[] = new String[words.size()];
         for(int i=0; i<words.size(); i++)
             wrds[i] = (String) words.elementAt(i);
+        
         return wrds;
     }
     
@@ -218,8 +224,8 @@ public class Pencari {
                    break;
             }
         }
-        if (file==null)
-            return null;
+        
+        if (file == null) return null;
         
         StringBuffer reading = new StringBuffer(13);
         int ch = 0;
@@ -229,11 +235,13 @@ public class Pencari {
         
         InputStream is = this.getClass().getResourceAsStream("/dic/" + dic_file);
         InputStreamReader ir;
+        
         try {
             ir = new InputStreamReader(is, encoding);
         } catch (UnsupportedEncodingException ex) {
             ir = new InputStreamReader(is, "UTF-8");
         }
+        
         while ((ch = ir.read()) > -1){
             if (ch=='\n'){
                 if(b == true)
@@ -251,7 +259,9 @@ public class Pencari {
                 }
             }
         }
+        
         is.close();
+        
         return reading.toString();
     }
 

@@ -23,18 +23,16 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.util.Vector;
-//import javax.microedition.midlet.MIDlet;
-//import javax.microedition.lcdui.Graphics;
-//import javax.microedition.lcdui.Font;
-//import java.util.Hashtable;
 
 public class Config {
     String lang_file; 
-    String diccionario; //El nombre del diccioniario seleccionado
-    String[] keys = {"-_@", "abc", "defé", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"}; // <# key anu tiasa digunakeun, pake sunda aksen (é)
+    String dictionary;
+    
     String selectedKeyboard;
+    String[] keys = {"-_@", "abc", "defé", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"}; // <# key anu tiasa digunakeun, pake sunda aksen (é)
     String[] words = {"Cari Kata", "Daftar Kamus", "Keluar", "Bantuan", "Tombol", "Kembali", "Setuju", "Tidak Ditemukan", "Bahasa", "!Menu !Utama: \\n*2 NAIK \\n*8 TURUN \\n*5 PILIH\\n!Pencarian: \\n** HAPUS \\n*0 NAIK \\n*\\u0023 TURUN", "Ihwal", "Lihat", "OK", "Batal", "Pilih", "Selesai", "Konfigurasi", "Tema", "Ganti Kamus", "Ke Menu Utama", "Kecil", "Sedang", "Besar", "Translate*"};
-    String language; //el idioma seleccionado
+    
+    String language; // bahasa yang dipilih
     DiskMan disk;
     String encoding;
     
@@ -46,7 +44,7 @@ public class Config {
         String dicts[] = null;
         selectedKeyboard = "";
         language = "";
-        diccionario = disk.getData("dictionary");
+        dictionary = disk.getData("dictionary");
         encoding = "UTF8";
        
         dicts = getDictionaries();
@@ -55,7 +53,7 @@ public class Config {
         //Si sigue en el listado selecciono ese diccionario sino eligo el primero que vea
         boolean b = false;
         for(int i = 0; i < dicts.length; i++){
-            if(dicts[i].compareTo(diccionario)==0){
+            if(dicts[i].compareTo(dictionary)==0){
                 b = true;
                 break;
             }
@@ -63,7 +61,7 @@ public class Config {
         if (b ==false)
             setDictionary(dicts[0]);
         else
-            setDictionary(diccionario);
+            setDictionary(dictionary);
         
         setLanguage(disk.getData("language"));
         setKeyboard(disk.getData("keyboard"));
@@ -121,7 +119,7 @@ public class Config {
 
             return tag;
         } catch (Exception ex){
-            ex.printStackTrace();
+            //ex.printStackTrace();
         }
         
         return null;
@@ -129,32 +127,20 @@ public class Config {
     
     public void setDictionary(String s){
         try {
-                        //System.out.println(s);
             String [] v = getValuesOfKey(s, "config");
-            //System.out.println(v[0]);
-            //System.out.println(v[0].length());
 
             if (v !=null)
                 lang_file = v[0];
-            diccionario = s;
-            //disk.saveDictionary(s);
+            dictionary = s;
             disk.setData("dictionary", s);
         } catch (IOException ex) {
-            ex.printStackTrace();
+            //ex.printStackTrace();
         }
         
-        
-        /*diccionario = s;
-        lang_file = s.toLowerCase();
-        lang_file = removeFromString(lang_file, "abcdefghijklmnopqrstuvwxyz");
-        
-        disk.saveDictionary(s);
-        //System.out.println(lang_file);
-        //\/:*?"<>|*/
     }
     
     public String getDictionary(){
-        return diccionario;
+        return dictionary;
     }
     
     private String removeFromString(String s, String c){
@@ -177,28 +163,29 @@ public class Config {
         boolean b = true;
         InputStream is = this.getClass().getResourceAsStream("/" + file);
         InputStreamReader ir;
+        
         try {
             ir = new InputStreamReader(is, encoding);
         } catch (UnsupportedEncodingException ex) {
             ir = new InputStreamReader(is, "UTF-8");
         }
+        
         while ((ch = ir.read()) > -1){
             if (ch=='\n'){
                 b = true;
                 v.addElement(lectura.toString());
                 lectura.setLength(0);
             }else{
-                if (ch=='#'){
-                    b = false;
-                }
-                if (b == true){
-                    lectura.append((char)ch);
-                }
+                if (ch=='#') b = false;
+                if (b == true) lectura.append((char)ch);
             }
         }
+        
         if (lectura.length() != 0)
             v.addElement(lectura.toString());
+        
         ir.close();
+        
         String dicts[] = new String[v.size()];
         for(int i=0; i<v.size(); i++){
             dicts[i] = (String) v.elementAt(i);
@@ -212,7 +199,7 @@ public class Config {
             String k[] = getValuesOfKey(string, "keyboard");
             if (k.length > 0) keys = k;
         } catch (IOException ex) {
-            ex.printStackTrace();
+            //ex.printStackTrace();
         }
         selectedKeyboard = string;
         disk.setData("keyboard", string);
@@ -223,19 +210,21 @@ public class Config {
     }
     
     private String[] getValuesOfKey(String key, String file) throws IOException{
-        //String teclado[] = new String[9];
         Vector v = new Vector (10, 3);
         StringBuffer lectura = new StringBuffer(13);
         StringBuffer lectura_valores = new StringBuffer(5);
         int ch = 0;
         boolean b = true;
+        
         InputStream is = this.getClass().getResourceAsStream("/" + file);
         InputStreamReader ir;
+        
         try {
             ir = new InputStreamReader(is, encoding);
         } catch (UnsupportedEncodingException ex) {
             ir = new InputStreamReader(is, "UTF-8");
         }
+        
         while ((ch = ir.read()) > -1){
             if (ch=='\n'){
                 if (lectura.toString().compareTo(key)==0)
@@ -252,14 +241,9 @@ public class Config {
                             if (ch=='|'){
                                 v.addElement(lectura_valores.toString());
                                 lectura_valores.setLength(0);
-                            }else{
+                            }else
                                 lectura_valores.append((char) ch);
-                                /*if (teclado[i]==null)
-                                    teclado[i] ="" + (char) ch;
-                                else
-                                    teclado[i] = teclado[i] + ((char) ch);
-                                 */
-                            }
+                            
                         }
                     }
                 }
@@ -285,7 +269,7 @@ public class Config {
     }
     
     /**
-     *retorna el arrray con el mapeo del teclado
+     * retorna el arrray con el mapeo del teclado
      */
     public String[] getKeyboard(){
         return keys;
@@ -298,7 +282,7 @@ public class Config {
         try {
             return getKeys("keyboard");
         } catch (IOException ex) {
-            ex.printStackTrace();
+            //ex.printStackTrace();
         }
         return null;
     }
@@ -312,10 +296,9 @@ public class Config {
             if (w.length > 0)
                 words = w;
         } catch (IOException ex) {
-            ex.printStackTrace();
+            //ex.printStackTrace();
         }
         
-        //System.out.println(palabras.length);
     }
     
     public String[] getLanguages(){

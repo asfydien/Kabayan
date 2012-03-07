@@ -21,13 +21,11 @@ package bin.logic;
 import bin.visual.DList;
 import bin.visual.KanvasCari;
 import java.io.IOException;
-//import java.io.UnsupportedEncodingException;
 
 public class ThrdPencari extends Thread {
     
-    /** Creates a new instance of ProcesoBuscador */
-    DList lista;
-    Pencari buscador;
+    DList list;
+    Pencari pencari;
     String text, txt;
     boolean quit, stop, bQuick=false;
     KanvasCari searchCanvas;
@@ -39,24 +37,24 @@ public class ThrdPencari extends Thread {
         stop = false;
         quit = false;
         text = "";
-        lista = sc.getList();
-        buscador = new Pencari();
+        list = sc.getList();
+        pencari = new Pencari();
     }
     
     public void setIndexFile(String file){
         try {
-            buscador.setIndexFile(file);
+            pencari.setIndexFile(file);
         } catch (IOException ex) {
-            ex.printStackTrace();
+            //ex.printStackTrace();
         }
     }
     
-    public String searchWord(String palabra){
-        if (palabra != null){
+    public String searchWord(String word){
+        if (word != null){
             try {
-                return buscador.searchExactWord(palabra);
+                return pencari.searchExactWord(word);
             } catch (IOException ex) {
-                ex.printStackTrace();
+                //ex.printStackTrace();
             }
         }
         return null;
@@ -88,7 +86,7 @@ public class ThrdPencari extends Thread {
             txtQ = new String(txtQuick);
             
             if (text.compareTo("")!=0 && stop==false){
-                lista.setItems(buscador.startSearch(text));
+                list.setItems(pencari.startSearch(text));
                 searchCanvas.repaint();
             } else if (txtQuick.compareTo("")!=0) { 
                 String ret = searchWord(txtQuick);
@@ -106,7 +104,7 @@ public class ThrdPencari extends Thread {
                     }
                 }
             } catch (InterruptedException ex) {
-                ex.printStackTrace();
+                //ex.printStackTrace();
             }
             
         }

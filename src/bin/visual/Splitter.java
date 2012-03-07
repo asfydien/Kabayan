@@ -1,5 +1,5 @@
 /* Memotong kalimat menjadi perkata, baris & memberi warna
- * Copyright (C) 2011 A. Sofyan Wahyudin
+ * Copyright (C) 2011-2012 A. Sofyan Wahyudin
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -26,14 +26,14 @@ public class Splitter {
     
     public class Cacagan // <# ieu teh struct di c# mah
     {
-        public int baris;
-        public int warna;
-        public String kata;
+        public int line;
+        public int color;
+        public String word;
        
-        public Cacagan(int baris, int warna, String kata) {
-            this.baris = baris;
-            this.warna = warna;
-            this.kata = kata;
+        public Cacagan(int line, int color, String word) {
+            this.line = line;
+            this.color = color;
+            this.word = word;
         }
     }
 
@@ -57,11 +57,11 @@ public class Splitter {
                 s = replaceString(s, "\\n", " \\n ");
             }
             
-            int wTotal=0;
-            int wKata=0;
+            int wTotal = 0;
+            int wKata = 0;
             
-            int line=0;
-            int warna=0; // hideung
+            int line = 0;
+            int warna; // hideung
             String kata;
             
             int spasi = font.stringWidth(" ");  // ukuran spasi
@@ -89,7 +89,7 @@ public class Splitter {
                 warna=0;
                 
                 // periksa tiap kata, jika ada tanda, warna apakah itu!
-                if (sKata.length()>0) {
+                if (sKata.length() > 0) {
                     
                     int k = key.indexOf(sKata.charAt(0));
                     
@@ -105,10 +105,12 @@ public class Splitter {
                         
                 
                 if (kata.equals("\\n")) {
-                    kata="";
-                    wTotal=0;
+                    kata  = "";
+                    wTotal = 0;
+                    
                     if (isNewLine == false) line++;   // lamun tos baris anyar secara otomatis, tong di tambahan
-                    isNewLine=false;
+                    
+                    isNewLine = false;
                 } else { 
                     
                     wKata = font.stringWidth(kata);
@@ -144,23 +146,23 @@ public class Splitter {
         int warna[] = {0x000000, 0x800000, 0x008000, 0x0000A0};
         Cacagan cn;
         
-        for (int i=0;i<hasil.size();i++){
+        for (int i=0; i<hasil.size(); i++){
            cn = (Cacagan)hasil.elementAt(i);
-           if (cn.kata.length()>0 && cn.baris>=firstLine & cn.baris<(firstLine+jmlBaris)){
+           if (cn.word.length() > 0 && cn.line >= firstLine & cn.line < (firstLine+jmlBaris)){
                 // tentukeun baris
-                if (oldBaris != cn.baris){
-                    oldBaris = cn.baris;
+                if (oldBaris != cn.line){
+                    oldBaris = cn.line;
                     xStart=x;
                 }
                 
-                g.setColor(warna[cn.warna]);
+                g.setColor(warna[cn.color]);
                 
-                if (cn.warna==0 & clTeks!=0x000000)
+                if (cn.color == 0 & clTeks != 0x000000)
                     g.setColor(clTeks);
 
                 // tulis isi sesuai baris
-                g.drawString(cn.kata, xStart, y+(hFont*((cn.baris)-firstLine)), g.TOP | g.LEFT);
-                xStart += font.stringWidth(cn.kata) + spasi; // <# tendeun posisi x terakhir
+                g.drawString(cn.word, xStart, y+(hFont*(cn.line-firstLine)), g.TOP | g.LEFT);
+                xStart += font.stringWidth(cn.word) + spasi; // <# tendeun posisi x terakhir
            }
         }
     }

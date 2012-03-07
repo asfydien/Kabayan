@@ -29,8 +29,8 @@ public class Kabayan extends MIDlet {
     //public KanvasTranslate pTranslate;
     private Display layar;
     
-    public String _NAMAVERSI   = "Kabayan 0.1.6";
-    public String _LABELBOTTOM = "- hurip sunda -";
+    public String NAMEVERSION = "Kabayan 0.1.6";
+    public String LABELBOTTOM = "- hurip sunda -";
     
     public Kabayan(){
         

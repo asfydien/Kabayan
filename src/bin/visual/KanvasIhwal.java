@@ -72,7 +72,7 @@ public class KanvasIhwal extends Canvas implements CommandListener{
         // tulis isi
         g.setFont(huruf);
         //g.setColor(0xD2D2D2);
-        g.drawString(midlet._NAMAVERSI, getWidth()/2, ti + (th*1), g.BOTTOM|g.HCENTER);
+        g.drawString(midlet.NAMEVERSION, getWidth()/2, ti + (th*1), g.BOTTOM|g.HCENTER);
         
         g.setColor(0xBFBFBF);
         g.drawString("Sofyan Wahyudin", getWidth()/2, ti + (th*2), g.BOTTOM|g.HCENTER);

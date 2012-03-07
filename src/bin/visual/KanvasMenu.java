@@ -1,4 +1,4 @@
-/* 
+/* Menu Utama Kabayan
  * Copyright (C) 2011 A. Sofyan Wahyudin
  * 
  * This program is free software: you can redistribute it and/or modify
@@ -17,31 +17,31 @@
 
 package bin.visual;
 
-import javax.microedition.lcdui.*;
 import bin.logic.Kabayan;
-//import java.io.IOException;
+import javax.microedition.lcdui.*;
 
 public class KanvasMenu extends Canvas implements CommandListener { 
     private Kabayan midlet;
-    private Command cmdKeluar, cmdPilih;
-    private String[]  menuItems;
-    private int selectedItem;
-
-    private Image imTL = null, imTR = null, imBL = null, imBR = null, imCT = null; // <# gambar pamaes
-    private Image imStrip1 = null, imStrip2 = null; // <# gambar pamaes
-    private boolean bImg = true;
-    private String fileImgTL, fileImgTR, fileImgBL, fileImgBR;
-    private Font huruf, hurufSel;
-    private int xCenter, yCenter;
     
     public static final int IMAGE_TOP_LEFT = 0, IMAGE_TOP_RIGHT = 1, IMAGE_BUTTON_LEFT = 2, IMAGE_BUTTON_RIGHT = 3;
     
+    private Command cmdKeluar, cmdPilih;
+    
+    private String[]  menuItems = {"Cari Kata", "Konfigurasi", "Bantuan", "Tentang"};
+    
+    private String fileImgTL, fileImgTR, fileImgBL, fileImgBR;
+    private int selectedItem = 0;
+    private int xCenter, yCenter;
     private int clLatar, clMenuSel, clMenu, clPanah, clTagAtas, clTagBawah;
     
-    String sDaring="";
+    private Image imTL = null, imTR = null, imBL = null, imBR = null, imCT = null; // <# gambar pamaes
+    private Image imStrip1 = null, imStrip2 = null; // <# gambar pamaes
+    
+    private boolean bImg = true;
+    
+    private Font huruf, hurufSel;
     
     private ImageBlend ib = new ImageBlend();
-    private Gradient grad = new Gradient();
     
     private void setWarna(int clLatar, int clMenuSel, int clMenu, int clPanah, int clTagAtas, int clTagBawah){
       this.clLatar = clLatar;
@@ -55,20 +55,6 @@ public class KanvasMenu extends Canvas implements CommandListener {
     public KanvasMenu(Kabayan midlet) {
       this.midlet = midlet;
 
-      menuItems = new String[4]; 
-      menuItems[0] = "Cari Kata";
-      menuItems[1] = "Konfigurasi";
-      menuItems[2] = "Bantuan";
-      menuItems[3] = "Tentang";
-      //menuItems[4] = "Translate";
-
-      selectedItem = 0;
-      
-      cmdKeluar = new Command("Keluar", Command.EXIT, 2);
-      cmdPilih = new Command("Pilih", Command.OK, 1);
-      addCommand(cmdKeluar);
-      addCommand(cmdPilih);
-      
       setCommandListener(this);
       setLanguage();
       
@@ -86,8 +72,10 @@ public class KanvasMenu extends Canvas implements CommandListener {
     public void setLanguage(){
         removeCommand(cmdKeluar);
         removeCommand(cmdPilih);
+        
         cmdKeluar = new Command(midlet.cfg.getWord("EXIT"), Command.EXIT, 2);
         cmdPilih = new Command(midlet.cfg.getWord("OK"), Command.OK, 1);
+        
         addCommand(cmdKeluar);
         addCommand(cmdPilih);
 
@@ -102,14 +90,12 @@ public class KanvasMenu extends Canvas implements CommandListener {
     public void setTema(int index){
         switch (index){
             case 0:
-                //setWarna(0xCDE8CE, 0x657F3B, 0xA4CC5F, 0x657F3B, 0xA4CC5F, 0x562E3C);
                 setWarna(0xCDE8CE, 0x306249, 0x4F7964, 0x32634A, 0x217B26, 0x217B26);
                 fileImgBR = "/img/default.png";
                 fileImgTL = ""; fileImgTR = ""; fileImgBL = "";
                 bImg = true;
                 break;
             case 1:
-                //setWarna(0x828CFF, 0x063772, 0x0474E8C, 0x3A4272, 0x3A4272, 0x3A4272);
                 setWarna(0x828CFF, 0x0A3566, 0x0474E8C, 0x3A4272, 0x3A4272, 0x3A4272);
                 fileImgBL = "/img/injected.png";
                 fileImgTL = ""; fileImgTR = ""; fileImgBR = "";
@@ -120,7 +106,7 @@ public class KanvasMenu extends Canvas implements CommandListener {
                 fileImgBR = "/img/lesstrenk.png";
                 fileImgTL = ""; fileImgTR = ""; fileImgBL = "";
                 
-                bImg = (getWidth() >= 240) ? true : false;  // iif di vb mah
+                bImg = (getWidth() >= 240) ? true : false;
                 
                 break;
         }
@@ -203,9 +189,9 @@ public class KanvasMenu extends Canvas implements CommandListener {
         
         g.setFont(huruf);
         g.setColor(clTagAtas);
-        g.drawString(midlet._NAMAVERSI, xCenter, 12, g.TOP | g.HCENTER);
+        g.drawString(midlet.NAMEVERSION, xCenter, 12, g.TOP | g.HCENTER);
         g.setColor(clTagBawah);
-        g.drawString(midlet._LABELBOTTOM, xCenter, getHeight() - huruf.getHeight() - 7 , g.TOP | g.HCENTER);
+        g.drawString(midlet.LABELBOTTOM, xCenter, getHeight() - huruf.getHeight() - 7 , g.TOP | g.HCENTER);
         
         g.setFont(hurufSel);
 
