@@ -25,7 +25,7 @@ public class KanvasMenu extends Canvas implements CommandListener {
     
     public static final int IMAGE_TOP_LEFT = 0, IMAGE_TOP_RIGHT = 1, IMAGE_BUTTON_LEFT = 2, IMAGE_BUTTON_RIGHT = 3;
     
-    private Command cmdKeluar, cmdPilih;
+    private Command cmdKeluar, cmdPilih, cmdBack;
     
     private String[]  menuItems = {"Cari Kata", "Konfigurasi", "Bantuan", "Tentang"};
     
@@ -75,6 +75,7 @@ public class KanvasMenu extends Canvas implements CommandListener {
         
         cmdKeluar = new Command(midlet.cfg.getWord("EXIT"), Command.EXIT, 2);
         cmdPilih = new Command(midlet.cfg.getWord("OK"), Command.OK, 1);
+        cmdBack = new Command(midlet.cfg.getWord("BACK"), Command.BACK, 2);
         
         addCommand(cmdKeluar);
         addCommand(cmdPilih);
@@ -265,13 +266,19 @@ public class KanvasMenu extends Canvas implements CommandListener {
                 Display.getDisplay(midlet).setCurrent(new KanvasKonfig(midlet));
                 break;
             case 2: 
-                KanvasNote kNote = new KanvasNote(midlet, this, midlet.cfg.getWord("HELP").toUpperCase(), midlet.cfg.getWord("TEXT_HELP"));
-                kNote.setWarna(0xFFFFFF, 0x0023BF, 0x0026AF, 0xDDDDDD, 0xEFEFEF, 0x000000, 0xFFFFFF, 0xEFEFEF);
-                kNote.setTeksAlignHead(KanvasNote.ALIGN_HEAD_CENTER);
-                Display.getDisplay(midlet).setCurrent(kNote);
+                String hlp = midlet.cfg.getWord("TEXT_HELP");
+                
+                hlp =  replaceString(hlp, "\\n", "\n");
+                hlp =  replaceString(hlp, "\\u0023", "\u0023");
+                
+                showForm(midlet.cfg.getWord("HELP"), hlp, cmdBack, null);
                 break; 
             case 3: 
-                Display.getDisplay(midlet).setCurrent(new KanvasIhwal(midlet));       
+                showForm(midlet.cfg.getWord("ABOUT"), 
+                        midlet.NAMEVERSION +
+                        "\n© 2012 Sofyan" +
+                        "\n\nUrl:\nhttp://code.google.com/p/kabayan/" +
+                        "\n\nIcon set\nFugue and Tango Icons", cmdBack, null);
                 break;
             case 4: 
                 //midlet.pTranslate.init();
@@ -288,6 +295,41 @@ public class KanvasMenu extends Canvas implements CommandListener {
             pilihMenu();
             repaint();
         }
+        
+        if (c == cmdBack) Display.getDisplay(midlet).setCurrent(this);
+    }
+    
+    private void showForm(String j, String s, Command c1, Command c2){
+        Form f = new Form(j);
+        
+        f.append(new StringItem("", s));
+        f.addCommand(c1);
+        if (c2!=null) f.addCommand(c2);
+        f.setCommandListener(this);
+        
+        Display.getDisplay(midlet).setCurrent(f);
+        
+    }
+    
+    public static String replaceString(String s, String find, String replace) {
+
+        StringBuffer sb = new StringBuffer();
+
+        int idx = s.indexOf(find);
+        int startPos = 0;
+        int l = find.length();
+
+        // ganti kabeh
+        while (idx != -1) {
+            sb.append(s.substring(startPos, idx)).append(replace);
+            startPos = idx + l;
+            idx = s.indexOf(find, startPos);
+        }
+
+        // tambahkeun sesana
+        sb.append(s.substring(startPos, s.length()));
+
+        return sb.toString();
     }
     
     // pointerPressed() pointerDragged() pointerReleased() 

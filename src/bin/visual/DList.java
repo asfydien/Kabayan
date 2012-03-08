@@ -146,7 +146,7 @@ public class DList extends DControl {
             
             if (bImage) xTeks += imgSize + 2;   // lamun pake image, tambah indent
             
-            if ( content!=null && content.length>itemsVisibles) wItem = width-6;    // jang sroll
+            if ( content!=null && content.length>itemsVisibles) wItem = width-4;    // jang sroll
     }
     
     public void render (Graphics g){
@@ -163,6 +163,12 @@ public class DList extends DControl {
                 if (i < content.length){
                     
                     g.setFont(huruf);
+                    
+                    if (bStrip){
+                        g.setColor(clListStrip);    // <= garis
+                        g.fillRect(x, y1, wItem+1, 1);
+                        g.fillRect(x, y1+itemtagHeigh, wItem+1, 1);
+                    }
                     
                     if (i == hoveredItem){
                         drawHoverItem(g, x, y1, itemtagHeigh);
@@ -182,10 +188,10 @@ public class DList extends DControl {
                         
                     }else{
                          // <# ameh list katinggalina belang, warnaan daftar anu indekna genap
-                        if(bStrip && (i % 2 == 0)){
-                           g.setColor(clListStrip);
-                           g.fillRect(x, y1, wItem+1, itemHeigh);  
-                        }
+                        //if(bStrip && (i % 2 == 0)){
+                        //   g.setColor(clListStrip);
+                           //g.fillRect(x, y1, wItem+1, itemHeigh);  
+                        //}
                         
                         if ( !(activeItem != -1 & activeItem == i) & bImage) 
                             drawIcon(g, 1, x+2, y1);
@@ -253,8 +259,9 @@ public class DList extends DControl {
                 
             int itemSell = (hoveredItem-firstVisible);    // posisi item anu dipilih
             
-            g.setColor(clBorder2);
-            g.drawRect(x + width-3, y, 3, height);    // jieun kotak bingkai bar
+            g.setColor(0xFFFFFF);
+            //g.drawRect(x + width-3, y, 3, height);    // jieun kotak bingkai bar
+            //g.fillRect(x + width-1, y, 2, height);
             
             // turun
             if (itemSell==jmlTampil-1 && hoveredItem>jmlTampil-1)
@@ -267,7 +274,8 @@ public class DList extends DControl {
             }
             
             g.setColor(clBar);
-            g.fillRect(x + width-2, y+1+yScroll, 2, hScroll-hGeser-1);    // +1 & -1 ameh hScroll aya di jero bar
+            //g.fillRect(x + width-2, y+1+yScroll, 2, hScroll-hGeser-1);    // +1 & -1 ameh hScroll aya di jero bar
+            g.fillRect(x + width-1, y+yScroll, 2, hScroll-hGeser);
         }
         
     }

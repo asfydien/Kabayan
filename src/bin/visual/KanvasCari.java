@@ -38,7 +38,7 @@ public class KanvasCari extends Canvas implements CommandListener {
     private ThrdPencari pPencari;
     
     private int clLatar = 0xFFFFFF;
-    private int clQBorder1 = 0xFFFFFF, clQBorder2 = 0x000000, clQFIll = 0xD2D2D2;
+    private int clQLine1 = 0xFFFFFF, clQLine2 = 0x000000, clQFIll = 0xD2D2D2;
     
     private String[] menu = {"Ganti kamus", "Quick view", "Font Size", "Ke Menu utama"};
     private boolean bMenu = false, bDict = false, bFont = false, bQuick = false, bCmdLihat;
@@ -196,7 +196,7 @@ public class KanvasCari extends Canvas implements CommandListener {
             case 0:
                 lstResults.setWarna(0x000000, 0xFFFFFF, 0x4D9336, 0x306249, 0x4E9935, 0xF5FFF5, 0x4D9336);
                 txtCari.setWarna(0x005000, 0x000000, 0xDFDFDF, 0x687256, 0xCCCCCC, 0xD3D3D3, 0xF2F2F2);
-                clLatar = 0xFAFFFA; clQBorder1=0x687256; clQBorder2=0xEAF2EA; clQFIll = 0xDEE5DE;
+                clLatar = 0xFAFFFA; clQLine1=0x687256; clQLine2=0xEAF2EA; clQFIll = 0xDEE5DE;
                 
                 deg = (resMode>1) ? 0x02190A : 0x0C602F;    // lamun layar leutik, saruakeun warna 1&2 ameh gancang
 
@@ -205,9 +205,10 @@ public class KanvasCari extends Canvas implements CommandListener {
                 fontbox.setWarna(0x0C602F, deg, 0xFFFFFF);
                 break;
             case 1:
-                lstResults.setWarna(0x00003F, 0xFFFFFF, 0x2146DD, 0x1E41CC, 0x2146DD, 0xF5F5FF, 0x41418C);
+                //lstResults.setWarna(0x00003F, 0xFFFFFF, 0x2146DD, 0x1E41CC, 0x2146DD, 0xF5F5FF, 0x41418C);
+                lstResults.setWarna(0x00003F, 0xFFFFFF, 0x2146DD, 0x1E41CC, 0x2146DD, 0xE0E0E0, 0x41418C);
                 txtCari.setWarna(0x000050, 0x000000, 0xDFDFDF, 0x4D4DA5, 0xCCCCCC, 0xD3D3D3, 0xF2F2F2);
-                clLatar = 0xF8F8FF; clQBorder1=0x7F7FFF; clQBorder2=0xD8D8FF; clQFIll = 0xCCCCFF;
+                clLatar = 0xF8F8FF; clQLine1=0x7F7FFF; clQLine2=0xD8D8FF; clQFIll = 0xCCCCFF;
                 
                 deg = (resMode>1) ? 0x112359 : 0x2342B2;
                 
@@ -218,7 +219,7 @@ public class KanvasCari extends Canvas implements CommandListener {
             case 2:
                 lstResults.setWarna(0xD8D8D8, 0xFFFFFF, 0x8C8C8C, 0xE5E5E5, 0x727272, 0x0C0C0C, 0xFFFFFF);
                 txtCari.setWarna(0x000050, 0x000000, 0xDFDFDF, 0xFFFFFF, 0xCCCCCC, 0xD3D3D3, 0x000000);
-                clLatar = 0x000000; clQBorder1=0xE5E5E5; clQBorder2=0xD8D8D8; clQFIll = 0xD2D2D2;
+                clLatar = 0x000000; clQLine1=0xE5E5E5; clQLine2=0xD8D8D8; clQFIll = 0xD2D2D2;
                 
                 deg = (resMode>1) ? 0x000000 : 0x333333;
                 
@@ -308,16 +309,22 @@ public class KanvasCari extends Canvas implements CommandListener {
     private  void drawQuick(Graphics g){
         int seper3 = getHeight()/3;
         int yQuick = (seper3*2) + 3;
-        int hQuick = getHeight() - yQuick - 2; 
+        int hQuick = getHeight() - yQuick; 
         
         g.setColor(clQFIll);
-        g.fillRect (2, yQuick, getWidth() - 5, hQuick);
+        g.fillRect (0, yQuick, getWidth(), hQuick);
 
-        g.setColor(clQBorder1);
-        g.drawRect(2, yQuick, getWidth() - 5, hQuick);
+        g.setColor(clQLine1);
+        g.fillRect(0, yQuick, getWidth(), 1);
         
-        g.setColor(clQBorder2);
-        g.drawRect(3, yQuick+1, getWidth() - 7, hQuick-2);
+        for (int i=0; i<3; i++)
+            g.drawRect((getWidth()/2 - 6)+(6*i), yQuick+3, 1, 1);
+        
+        g.setColor(clQLine2);
+        g.fillRect(0, yQuick+1, getWidth(), 1);
+        
+        g.setColor(0xBDCCBD);
+        g.fillRect(0, yQuick+6, getWidth(), 1);
         
         tulisQuick(g);
     }
@@ -328,7 +335,7 @@ public class KanvasCari extends Canvas implements CommandListener {
     
     public void tulisQuick(Graphics g) {
         int seper3 = getHeight()/3;
-        int yQuick = (seper3*2) + 3;
+        int yQuick = (seper3*2) + 7;
         int hQuick = getHeight() - yQuick - 2; 
         int maxLine = (hQuick-4)/huruf.getHeight();
 

@@ -30,7 +30,9 @@ public class Config {
     
     String selectedKeyboard;
     String[] keys = {"-_@", "abc", "defé", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"}; // <# key anu tiasa digunakeun, pake sunda aksen (é)
-    String[] words = {"Cari Kata", "Daftar Kamus", "Keluar", "Bantuan", "Tombol", "Kembali", "Setuju", "Tidak Ditemukan", "Bahasa", "!Menu !Utama: \\n*2 NAIK \\n*8 TURUN \\n*5 PILIH\\n!Pencarian: \\n** HAPUS \\n*0 NAIK \\n*\\u0023 TURUN", "Ihwal", "Lihat", "OK", "Batal", "Pilih", "Selesai", "Konfigurasi", "Tema", "Ganti Kamus", "Ke Menu Utama", "Kecil", "Sedang", "Besar", "Translate*"};
+    String[] words = {"Cari Kata", "Daftar Kamus", "Keluar", "Bantuan", "Tombol", "Kembali", "Setuju", "Tidak Ditemukan", "Bahasa", 
+                      "Menu Utama: \\n2 → Naik \\n8 → Turun \\n5 → Pilih\\n\nPencarian: \\n* → Hapus \\n0 → Naik \\n\u0023 → Turun", 
+                      "Ihwal", "Lihat", "OK", "Batal", "Pilih", "Selesai", "Konfigurasi", "Tema", "Ganti Kamus", "Ke Menu Utama", "Kecil", "Sedang", "Besar", "Translate*"};
     
     String language; // bahasa yang dipilih
     DiskMan disk;
@@ -97,7 +99,7 @@ public class Config {
                     
             return item;
         } catch (IOException ex) {
-            ex.printStackTrace();
+            //ex.printStackTrace();
         }
         return null;
     }
@@ -305,7 +307,7 @@ public class Config {
         try {
             return getKeys("interface");
         } catch (IOException ex) {
-            ex.printStackTrace();
+            //ex.printStackTrace();
         }
         return null;
     }

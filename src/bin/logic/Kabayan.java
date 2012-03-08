@@ -18,9 +18,10 @@
 
 package bin.logic;
 
-import javax.microedition.midlet.MIDlet;
+import bin.visual.KanvasCari;
+import bin.visual.KanvasMenu;
 import javax.microedition.lcdui.Display;
-import bin.visual.*;
+import javax.microedition.midlet.MIDlet;
 
 public class Kabayan extends MIDlet {
     public KanvasCari pPencarian;

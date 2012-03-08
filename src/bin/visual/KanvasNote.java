@@ -17,15 +17,9 @@
 
 
 package bin.visual;
-import javax.microedition.lcdui.Canvas;
-import javax.microedition.lcdui.Command;
-import javax.microedition.lcdui.CommandListener;
-import javax.microedition.lcdui.Display;
-import javax.microedition.lcdui.Displayable;
-import javax.microedition.lcdui.Font;
-import javax.microedition.lcdui.Graphics;
 import bin.logic.Kabayan;
 import java.util.Vector;
+import javax.microedition.lcdui.*;
 
 public class KanvasNote extends Canvas  implements CommandListener {
     
