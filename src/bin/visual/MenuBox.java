@@ -174,11 +174,12 @@ public class MenuBox {
         g.fillRect(0, 0, w, h);
         
         // gradasi atas
-        for (int i=0; i<20; i++){
-            g.setColor(grad.brightColor(cl, 0-i));
-            g.fillRect(0, 15-i, w, 1);
-            System.out.println("cl "+ Integer.toHexString(grad.brightColor(cl, 0-i)));
-        }
+        if (getResMode()>=2)
+            for (int i=0; i<20; i++){
+                g.setColor(grad.brightColor(cl, 0-i));
+                g.fillRect(0, 15-i, w, 1);
+                System.out.println("cl "+ Integer.toHexString(grad.brightColor(cl, 0-i)));
+            }
         
         // dark
         g.setColor(grad.brightColor(cl, -35));
@@ -199,14 +200,17 @@ public class MenuBox {
             g.drawRect((wScreen/2 - 5)+(6*i), 4, 0, 0);
         
         // gradasi bawah
-        for (int i=0; i<35; i++){
-            g.setColor(grad.brightColor(cl, 0-i));
-            g.fillRect(0, (h-35)+i, w, 1);
-        }
+        if (getResMode()>=2)
+            for (int i=0; i<35; i++){
+                g.setColor(grad.brightColor(cl, 0-i));
+                g.fillRect(0, (h-35)+i, w, 1);
+            }
         
         // 
         ret = Image.createImage(ret);
-        ret = ib.blend(ret, opacity);
+        
+        if (getResMode()>=2)
+            ret = ib.blend(ret, opacity);
         
         return ret;
     }

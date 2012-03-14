@@ -81,14 +81,15 @@ public class KanvasNote extends Canvas  implements CommandListener {
         
         huruf = Font.getFont(Font.FACE_PROPORTIONAL, Font.STYLE_PLAIN, fontSize);     
         
-        setTema(midlet.cfg.getSavedTemaInt());
+        setTema();
         
         hasil = tn.cacag(huruf, teksIsi, getWidth()-4);
         
     }
     
-    private void setTema(int index){
-        
+    private void setTema(){
+        setWarna(midlet.cfg.getColor(15), midlet.cfg.getColor(16));
+        /*
         switch (index){
             case 0:
                 setWarna(0xFFFFFF, 0x0C602F);
@@ -106,6 +107,8 @@ public class KanvasNote extends Canvas  implements CommandListener {
         
         repaint();
         
+        * 
+        */
     }
     
     public void setTeksHead(String s){

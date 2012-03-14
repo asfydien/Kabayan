@@ -38,7 +38,7 @@ public class Config {
     DiskMan disk;
     String encoding;
     
-    private String[] tema = {"Default", "Blue Injected", "Lesstrenk"};
+    private String[] tema = {"Default"};
             
     /** Creates a new instance of Config */
     public Config() {
@@ -50,6 +50,7 @@ public class Config {
         encoding = "UTF8";
        
         dicts = getDictionaries();
+        tema = getThemeList();
         
         //Comprueba que diccionario preferido del usuario sigue estando en el listado de diccionarios
         //Si sigue en el listado selecciono ese diccionario sino eligo el primero que vea
@@ -331,6 +332,7 @@ public class Config {
     
     public void saveTema(String tema){
         disk.setData("tema", tema);
+        setColorTheme();
     }
     
     public String getSavedTema(){
@@ -392,15 +394,61 @@ public class Config {
         return disk.getDataBool(key);
     }
  
-    int[] arrColor = {};
+    // # tema
+    int[] arrColor = {0xFAFFFA, 0x687256, 0xEAF2EA, 0xDEE5DE,   // search 
+                      0x005000, 0x000000, 0xDFDFDF, 0x687256,   // textfield
+                      0x000000, 0xFFFFFF, 0x4D9336, 0x306249, 0x4E9935, 0xE0E0E0, // list result
+                      0x4D9336, // menu panel
+                      0xFFFFFF, 0x0C602F, // note
+                      0xFFFFFF, 0x0C602F, 0x0A5429, 0xB8D8B9, 0xA3CCA4, 0x0D6632, 0x0A5429, 0xDDDDDD, 0xEFEFEF, 0xFAFFF2, 0xCDE8CE,  // config
+                      0x31664B, 0x285940, 0xB8D8B9, 0x4F9437, 0xC5E5C5, 0xF4FCF4};    // list config
+    
+    public String[] getThemeList(){
+        try {
+            return getKeys("tema");
+        } catch (Exception e) {
+        }
+        
+        return null;
+    }
+    
+    public int[] setColorTheme(){
+        String[] warna = {};
+        int[] iWarna;
+        
+        try {
+            warna = getValuesOfKey(getSavedTema(), "tema");
+            
+            if (warna.length > 0){
+                iWarna = new int[warna.length];
+        
+                for (int i=0; i<iWarna.length; i++)
+                    iWarna[i] = Integer.valueOf(warna[i], 16).intValue();
+
+                arrColor = iWarna;
+            }
+        
+        } catch (Exception e) {
+            //e.printStackTrace();
+        }
+        
+        
+        return arrColor;
+    }
     
     /**
-     * [0]: DTextField border [1]: DTextField text
-     * [2]: DList item border1 [3]: DList  item border2 [4]: DList text
+     * clLatar, clQLine1, clQLine2, clQFIll;
+     * clTeks, clCursor, clFill, clBorder;
+     * clTeks, clSelTeks, clList, clBorder1, clBorder2, clListStrip;
+     * clMenu;
+     * clHeadTeks, clHead;
+     * clTeks, clSelFill, clSelBorder, clFill, clBorder, clEfek, clShadow1, clShadow2, clShadow3, clClient, clLatar;
+     * clTeks, clSelTeks, clList, clBorder1, clBorder2, clListStrip;
      * @param index
-     * @return 
+     * @return
      */
     public int getColor(int index){
         return arrColor[index];
+        
     }
 }

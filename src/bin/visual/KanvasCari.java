@@ -141,7 +141,7 @@ public class KanvasCari extends Canvas implements CommandListener {
         
         if (bQuick) modeQuickView(true);
         
-        setTema(midlet.cfg.getSavedTemaInt());
+        setTema();
         
     }
     
@@ -189,44 +189,27 @@ public class KanvasCari extends Canvas implements CommandListener {
         }
     }
     
-    private void setTema(int index){
-        int deg = 0;
+    private int getCl(int i){
+        return midlet.cfg.getColor(i);
+    }
+    
+    private void setTema(){
+        //int deg = 0;
         
-        switch (index){
-            case 0:
-                //lstResults.setWarna(0x000000, 0xFFFFFF, 0x4D9336, 0x306249, 0x4E9935, 0xF5FFF5, 0x4D9336);
-                lstResults.setWarna(0x000000, 0xFFFFFF, 0x4D9336, 0x306249, 0x4E9935, 0xE0E0E0);
-                txtCari.setWarna(0x005000, 0x000000, 0xDFDFDF, 0x687256);
-                clLatar = 0xFAFFFA; clQLine1=0x687256; clQLine2=0xEAF2EA; clQFIll = 0xDEE5DE;
-                
-                menubox.setWarna(0x4D9336);
-                menuboxDict.setWarna(0x4D9336);
-                fontbox.setWarna(0x0C602F, deg, 0xFFFFFF);
-                break;
-            case 1:
-                //lstResults.setWarna(0x00003F, 0xFFFFFF, 0x2146DD, 0x1E41CC, 0x2146DD, 0xF5F5FF, 0x41418C);
-                lstResults.setWarna(0x00003F, 0xFFFFFF, 0x2146DD, 0x1E41CC, 0x2146DD, 0xE0E0E0);
-                txtCari.setWarna(0x000050, 0x000000, 0xDFDFDF, 0x4D4DA5);
-                clLatar = 0xF8F8FF; clQLine1=0x7F7FFF; clQLine2=0xD8D8FF; clQFIll = 0xCCCCFF;
-                
-                menubox.setWarna(0x2146DD);
-                menuboxDict.setWarna(0x2146DD);
-                fontbox.setWarna(0x2342B2, deg, 0xFFFFFF);
-                break;
-            case 2:
-                lstResults.setWarna(0xD8D8D8, 0xFFFFFF, 0x8C8C8C, 0xE5E5E5, 0x727272, 0x0C0C0C);
-                txtCari.setWarna(0x000050, 0x000000, 0xDFDFDF, 0xFFFFFF);
-                clLatar = 0x000000; clQLine1=0xE5E5E5; clQLine2=0xD8D8D8; clQFIll = 0xD2D2D2;
-                
-                menubox.setWarna(0x515151);
-                menuboxDict.setWarna(0x515151);
-                fontbox.setWarna(0x515151, deg, 0xFFFFFF);
-                break;
-        }
-
+        clLatar  = getCl(0);
+        clQLine1 = getCl(1);
+        clQLine2 = getCl(2);
+        clQFIll  = getCl(3);
+        
+        txtCari.setWarna(getCl(4), getCl(5), getCl(6), getCl(7));
+        
+        lstResults.setWarna(getCl(8), getCl(9), getCl(10), getCl(11), getCl(12), getCl(13));
+        
+        menubox.setWarna(getCl(14));
+        menuboxDict.setWarna(getCl(14));
+        fontbox.setWarna(getCl(14), getCl(14), 0xFFFFFF);
         
         repaint();
-       
     }
     
     private void setFontSize(){

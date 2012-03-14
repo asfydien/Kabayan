@@ -101,15 +101,25 @@ public class KanvasKonfig extends Canvas implements CommandListener{
             imTab = Image.createImage(simgTab);
         }  catch (java.io.IOException e) { }
         
-        setTema(midlet.cfg.getSavedTemaInt());
+        setTema();
         
         initTab( 2, 2, getWidth()-4, getHeight()-4);
         
         gantiList();
     }
     
-    private void setTema(int index){
+    private int getCl(int i){
+        System.out.println("getCl " + i);
+        return midlet.cfg.getColor(i);
         
+    }
+    
+    private void setTema(){
+
+        setWarna(getCl(17), getCl(18), getCl(19), getCl(20), getCl(21), getCl(22), getCl(23), getCl(24), getCl(25), getCl(26), getCl(27));
+        list.setWarna(getCl(28), getCl(29), getCl(30), getCl(31), getCl(32), getCl(33));
+
+        /*
         switch (index){
             case 0:
                 list.setWarna(0x31664B, 0x285940, 0xB8D8B9, 0x4F9437, 0xC5E5C5, 0xF4FCF4);
@@ -124,6 +134,8 @@ public class KanvasKonfig extends Canvas implements CommandListener{
                 setWarna(0x000000, 0xF2F2F2, 0xFFFFFF, 0xA5A5A5, 0xB2B2B2, 0xE5E5E5, 0x0C0C0C, 0x2B2D2B, 0x343834, 0x333333, 0x000000);
                 break;
         }
+        * 
+        */
         
         repaint();
         
@@ -221,7 +233,7 @@ public class KanvasKonfig extends Canvas implements CommandListener{
                 case 3:
                     midlet.cfg.setData("tema", list.getSelectedText());
                     midlet.pMenu.setTema(midlet.cfg.getSavedTemaInt());
-                    setTema(list.getActiveItem());
+                    setTema();
                     break;
             }
             
