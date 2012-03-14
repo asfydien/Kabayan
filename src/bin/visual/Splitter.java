@@ -18,9 +18,9 @@
 
 package bin.visual;
 
-import javax.microedition.lcdui.Graphics;
-import javax.microedition.lcdui.Font;
 import java.util.Vector;
+import javax.microedition.lcdui.Font;
+import javax.microedition.lcdui.Graphics;
 
 public class Splitter {
     

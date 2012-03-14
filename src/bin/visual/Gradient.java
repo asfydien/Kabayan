@@ -72,6 +72,39 @@ public class Gradient {
             
     }
     
-   
+    public static int brightColor(int cl, int n){
+
+        float[] rgb = new float[3];
+        float c;
+
+        rgb[0] = ((cl >> 16) & 0xff);
+        rgb[1] = ((cl >> 8)  & 0xff);
+        rgb[2] = ((cl >> 0)  & 0xff);
+
+        for (int i=0; i<3; i++) {
+            c = rgb[i]/100f;
+            rgb[i] = (int)(rgb[i] + (c*n));        
+            
+            if (rgb[i]>255) rgb[i]=255;
+            if (rgb[i]<0) rgb[i]=0;
+        }
+
+        return (int)rgb[0] << 16 | (int)rgb[1] << 8 | (int)rgb[2];
+    }
+
+    public static void drawBrightRect(Graphics g, int color, int x, int y, int w, int h){
     
+        int c = h/2;
+        
+        g.setColor(color);
+        g.fillRect(x, y, w, h);
+        
+        for (int i=0; i<c; i++){
+            g.setColor(brightColor(c, i));
+            
+            g.fillRect(x, c-i, w, 1);
+            g.fillRect(x, c+i, w, 1);
+        }
+        
+    }
 }

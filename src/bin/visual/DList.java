@@ -51,17 +51,16 @@ public class DList extends DControl {
     // variabel render
     private int wItem, xTeks, yTeks, yTag;
     
-    private int clTeks, clSelTeks, clList, clBorder1, clBorder2, clListStrip, clBar;
+    private int clTeks, clSelTeks, clList, clBorder1, clBorder2, clListStrip;
     
     
-    public void setWarna(int clTeks, int clSelTeks, int clList, int clBorder1, int clBorder2, int clLisStrip, int clbar){
+    public void setWarna(int clTeks, int clSelTeks, int clList, int clBorder1, int clBorder2, int clLisStrip){
         this.clTeks = clTeks;
         this.clSelTeks = clSelTeks;
         this.clList = clList;
         this.clBorder1 = clBorder1;
         this.clBorder2 = clBorder2;
         this.clListStrip = clLisStrip;
-        this.clBar = clbar;
     }
     
     public DList(int x, int y, int lebar, int tinggi, int fontSize) {
@@ -80,7 +79,7 @@ public class DList extends DControl {
         
         content = null;
 
-        setWarna(0x000000, 0xFFFFFF, 0x85A54D, 0x657F3B, 0x92B752, 0xF2F4FF, 0xD85656);
+        setWarna(0x000000, 0xFFFFFF, 0x85A54D, 0x657F3B, 0x92B752, 0xF2F4FF);
     }
     
     public void setExtraItemHeight(int main){
@@ -260,9 +259,7 @@ public class DList extends DControl {
             int itemSell = (hoveredItem-firstVisible);    // posisi item anu dipilih
             
             g.setColor(0xFFFFFF);
-            //g.drawRect(x + width-3, y, 3, height);    // jieun kotak bingkai bar
-            //g.fillRect(x + width-1, y, 2, height);
-            
+
             // turun
             if (itemSell==jmlTampil-1 && hoveredItem>jmlTampil-1)
                 yScroll = (hoveredItem-(jmlTampil-1))*hGeser;
@@ -273,8 +270,7 @@ public class DList extends DControl {
                 yScroll += (hScroll-hGeser-hSisa); // + skip saitemen
             }
             
-            g.setColor(clBar);
-            //g.fillRect(x + width-2, y+1+yScroll, 2, hScroll-hGeser-1);    // +1 & -1 ameh hScroll aya di jero bar
+            g.setColor(clBorder1);
             g.fillRect(x + width-1, y+yScroll, 2, hScroll-hGeser);
         }
         

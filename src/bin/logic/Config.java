@@ -31,8 +31,8 @@ public class Config {
     String selectedKeyboard;
     String[] keys = {"-_@", "abc", "defé", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"}; // <# key anu tiasa digunakeun, pake sunda aksen (é)
     String[] words = {"Cari Kata", "Daftar Kamus", "Keluar", "Bantuan", "Tombol", "Kembali", "Setuju", "Tidak Ditemukan", "Bahasa", 
-                      "Menu Utama: \\n2 → Naik \\n8 → Turun \\n5 → Pilih\\n\nPencarian: \\n* → Hapus \\n0 → Naik \\n\u0023 → Turun", 
-                      "Ihwal", "Lihat", "OK", "Batal", "Pilih", "Selesai", "Konfigurasi", "Tema", "Ganti Kamus", "Ke Menu Utama", "Kecil", "Sedang", "Besar", "Translate*"};
+                      "Ihwal", "Lihat", "OK", "Batal", "Pilih", "Tutup", "Konfigurasi", "Tema", "Ganti Kamus", "Ke Menu Utama", "Kecil", "Sedang", "Besar", "Translate*",
+                      "Menu Utama:\\n(2) Naik, (8) Turun, (5) Pilih\\n\nPencarian:\\n(*) Hapus, (0) Naik, (\u0023) Turun"};
     
     String language; // bahasa yang dipilih
     DiskMan disk;
@@ -317,7 +317,8 @@ public class Config {
     }
     
     String[] langKey = {"SEARCH", "DICTIONARY", "EXIT", "HELP", "KEYBOARD", "BACK", "ACCEPT", "NO_RESULT", "LANGUAGE",
-                        "TEXT_HELP", "ABOUT", "LIHAT", "OK", "BATAL", "PILIH", "SELESAI", "KONFIGURASI", "TEMA", "GANTI_KAMUS", "KE_MENU_UTAMA", "KECIL", "SEDANG", "BESAR", "TRANSLATE"}; 
+                        "ABOUT", "LIHAT", "OK", "BATAL", "PILIH", "TUTUP", "KONFIGURASI", "TEMA", "GANTI_KAMUS", 
+                        "KE_MENU_UTAMA", "KECIL", "SEDANG", "BESAR", "TRANSLATE", "TEXT_HELP"}; 
     
     public String getWord(String s){
                 
@@ -390,5 +391,16 @@ public class Config {
     public boolean getDataBool(String key){
         return disk.getDataBool(key);
     }
+ 
+    int[] arrColor = {};
     
+    /**
+     * [0]: DTextField border [1]: DTextField text
+     * [2]: DList item border1 [3]: DList  item border2 [4]: DList text
+     * @param index
+     * @return 
+     */
+    public int getColor(int index){
+        return arrColor[index];
+    }
 }

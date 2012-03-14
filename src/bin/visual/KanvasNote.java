@@ -42,22 +42,18 @@ public class KanvasNote extends Canvas  implements CommandListener {
     public static final int ALIGN_HEAD_LEFT = 1, ALIGN_HEAD_CENTER = 2, ALIGN_HEAD_RIGHT = 3;
     
     // warna tema
-    private int clHeadTeks, clHead, clShadow1, clShadow2, clShadow3, clTeks, clFill, clLine;
+    private int clHeadTeks, clHead;
     
     //private FontBox fontbox;
     private FontBox fontbox;
 
+    private Gradient grad = new Gradient();
+    
     private Vector hasil;
     
-    public void setWarna(int clHeadTeks, int clHead, int clShadow1, int clShadow2, int clShadow3, int clTeks, int clFill, int clLine){
+    public void setWarna(int clHeadTeks, int clHead){
         this.clHeadTeks = clHeadTeks;
         this.clHead = clHead;
-        this.clShadow1 = clShadow1;
-        this.clShadow2 = clShadow2;
-        this.clShadow3 = clShadow3;
-        this.clTeks = clTeks;
-        this.clFill = clFill;
-        this.clLine = clLine;
     }
     
     public KanvasNote(Kabayan dict, Displayable dKembali, String sJudul, String sIsi) {
@@ -95,15 +91,15 @@ public class KanvasNote extends Canvas  implements CommandListener {
         
         switch (index){
             case 0:
-                setWarna(0xFFFFFF, 0x0C602F, 0x43512F, 0xDDDDDD, 0xEFEFEF, 0x000000, 0xFFFFFF, 0xEFEFEF);
+                setWarna(0xFFFFFF, 0x0C602F);
                 fontbox.setWarna(clHead, 0x02190A, clHeadTeks);
                 break;
             case 1:
-                setWarna(0xFFFFFF, 0x0026D7, 0x0026AF, 0xDDDDDD, 0xEFEFEF, 0x000000, 0xFFFFFF, 0xEFEFEF);
+                setWarna(0xFFFFFF, 0x0026D7);
                 fontbox.setWarna(0x2342B2, 0x112359, 0xFFFFFF);
                 break;
             case 2:
-                setWarna(0xFFFFFF, 0x333333, 0x000000, 0xDDDDDD, 0xEFEFEF, 0x000000, 0xFFFFFF, 0xEFEFEF);
+                setWarna(0xFFFFFF, 0x333333);
                 fontbox.setWarna(clHead, 0x000000, clHeadTeks);
                 break;
         }
@@ -154,15 +150,15 @@ public class KanvasNote extends Canvas  implements CommandListener {
         int tinggi = huruf.getHeight()+3;
         
         // bersihkeun layar
-        g.setColor(clFill);
+        g.setColor(0xFFFFFF);
         g.fillRect(0, 0, getWidth(), getHeight());
         
         // dina sababaraha hp lamun ku Line teu sempurna jadi ganti ku fillrect
-        g.setColor(clShadow3);
-        g.fillRect(0, 0, getWidth(), tinggi+3); // garis bayangan 2
-        g.setColor(clShadow2);
-        g.fillRect(0, 0, getWidth(), tinggi+2); // garis bayangan 1
-        g.setColor(clShadow1);
+        g.setColor(0xEFEFEF);
+        g.fillRect(0, 0, getWidth(), tinggi+3); // bayangan 2
+        g.setColor(0xDDDDDD);
+        g.fillRect(0, 0, getWidth(), tinggi+2); // bayangan 1
+        g.setColor(grad.brightColor(clHead, -10));
         g.fillRect(0, 0, getWidth(), tinggi+1); // garis paneges efek saacan bayangan
         g.setColor(clHead);
         g.fillRect(0, 0, getWidth(), tinggi); // head
@@ -170,7 +166,8 @@ public class KanvasNote extends Canvas  implements CommandListener {
         // ngadamel garis baris
         int startY = huruf.getHeight()+8;
         int hiFont = huruf.getHeight();
-        g.setColor(clLine);
+        
+        g.setColor(0xEFEFEF);
         for (int i=startY+hiFont; i<getHeight(); i+=hiFont)
             g.drawLine(0, i, getWidth(), i);
         
@@ -229,7 +226,7 @@ public class KanvasNote extends Canvas  implements CommandListener {
         
         maxBaris = (getHeight()-y)/font.getHeight();
         
-        tn.tulis(g, font, hasil, 2, y, firstLine, maxBaris, clTeks);
+        tn.tulis(g, font, hasil, 2, y, firstLine, maxBaris, 0x000000);
      }
     
     protected void keyPressed(int keyCode) {

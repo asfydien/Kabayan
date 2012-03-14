@@ -18,19 +18,20 @@
 
 package bin.logic;
 
+import bin.visual.Golodog;
 import bin.visual.KanvasCari;
-import bin.visual.KanvasMenu;
 import javax.microedition.lcdui.Display;
 import javax.microedition.midlet.MIDlet;
 
 public class Kabayan extends MIDlet {
     public KanvasCari pPencarian;
-    public KanvasMenu pMenu;
+    //public KanvasMenu pMenu;
+    public Golodog pMenu;
     public Config cfg;
     //public KanvasTranslate pTranslate;
     private Display layar;
     
-    public String NAMEVERSION = "Kabayan 0.1.6";
+    public String NAMEVERSION = "Kabayan 0.1.7";
     public String LABELBOTTOM = "- hurip sunda -";
     
     public Kabayan(){
@@ -38,12 +39,12 @@ public class Kabayan extends MIDlet {
         cfg = new Config();
         layar = Display.getDisplay(this);
         pPencarian = new KanvasCari(this);
-        pMenu = new KanvasMenu(this);
+        pMenu = new Golodog(this);
        // pTranslate = new KanvasTranslate(this);
 
     }
     public void startApp() {
-        layar.setCurrent(pMenu);
+        layar.setCurrent(pMenu.lsMenu);
     }
     
     public void pauseApp() {

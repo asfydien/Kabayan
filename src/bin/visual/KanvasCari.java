@@ -101,7 +101,7 @@ public class KanvasCari extends Canvas implements CommandListener {
         scmdLihat   = midlet.cfg.getWord("LIHAT");
         scmdMenu    = "Menu";
         scmdPilih   = midlet.cfg.getWord("PILIH");
-        scmdSelesai = midlet.cfg.getWord("SELESAI");
+        scmdSelesai = midlet.cfg.getWord("TUTUP");
         
         // label menu
         menu[0] = midlet.cfg.getWord("GANTI_KAMUS");
@@ -179,7 +179,7 @@ public class KanvasCari extends Canvas implements CommandListener {
         // cmdLihat bakal muncul lamun list pencarian ayaan
         if (lstResults.content != null && ((!bMenu | !bDict) & lstResults.content.length > 0)) {
             if (!bCmdLihat){
-                cmdLihat = cmdLihat = new Command(scmdLihat, Command.OK, 1);
+                cmdLihat = new Command(scmdLihat, Command.OK, 1);
                 addCommand(cmdLihat);
                 bCmdLihat=true;
             }
@@ -194,38 +194,33 @@ public class KanvasCari extends Canvas implements CommandListener {
         
         switch (index){
             case 0:
-                lstResults.setWarna(0x000000, 0xFFFFFF, 0x4D9336, 0x306249, 0x4E9935, 0xF5FFF5, 0x4D9336);
-                txtCari.setWarna(0x005000, 0x000000, 0xDFDFDF, 0x687256, 0xCCCCCC, 0xD3D3D3, 0xF2F2F2);
+                //lstResults.setWarna(0x000000, 0xFFFFFF, 0x4D9336, 0x306249, 0x4E9935, 0xF5FFF5, 0x4D9336);
+                lstResults.setWarna(0x000000, 0xFFFFFF, 0x4D9336, 0x306249, 0x4E9935, 0xE0E0E0);
+                txtCari.setWarna(0x005000, 0x000000, 0xDFDFDF, 0x687256);
                 clLatar = 0xFAFFFA; clQLine1=0x687256; clQLine2=0xEAF2EA; clQFIll = 0xDEE5DE;
                 
-                deg = (resMode>1) ? 0x02190A : 0x0C602F;    // lamun layar leutik, saruakeun warna 1&2 ameh gancang
-
-                menubox.setWarna(0x0C602F, deg, 0xFFFFFF, 0x063319, 0x0C602F);
-                menuboxDict.setWarna(0x0C602F, deg, 0xFFFFFF, 0x57662F, 0xFFFFFF);
+                menubox.setWarna(0x4D9336);
+                menuboxDict.setWarna(0x4D9336);
                 fontbox.setWarna(0x0C602F, deg, 0xFFFFFF);
                 break;
             case 1:
                 //lstResults.setWarna(0x00003F, 0xFFFFFF, 0x2146DD, 0x1E41CC, 0x2146DD, 0xF5F5FF, 0x41418C);
-                lstResults.setWarna(0x00003F, 0xFFFFFF, 0x2146DD, 0x1E41CC, 0x2146DD, 0xE0E0E0, 0x41418C);
-                txtCari.setWarna(0x000050, 0x000000, 0xDFDFDF, 0x4D4DA5, 0xCCCCCC, 0xD3D3D3, 0xF2F2F2);
+                lstResults.setWarna(0x00003F, 0xFFFFFF, 0x2146DD, 0x1E41CC, 0x2146DD, 0xE0E0E0);
+                txtCari.setWarna(0x000050, 0x000000, 0xDFDFDF, 0x4D4DA5);
                 clLatar = 0xF8F8FF; clQLine1=0x7F7FFF; clQLine2=0xD8D8FF; clQFIll = 0xCCCCFF;
                 
-                deg = (resMode>1) ? 0x112359 : 0x2342B2;
-                
-                menubox.setWarna(0x2342B2, deg, 0xFFFFFF, 0x19317F, 0x2342B2);
-                menuboxDict.setWarna(0x2342B2, deg, 0xFFFFFF, 0x2342B2, 0xFFFFFF);
+                menubox.setWarna(0x2146DD);
+                menuboxDict.setWarna(0x2146DD);
                 fontbox.setWarna(0x2342B2, deg, 0xFFFFFF);
                 break;
             case 2:
-                lstResults.setWarna(0xD8D8D8, 0xFFFFFF, 0x8C8C8C, 0xE5E5E5, 0x727272, 0x0C0C0C, 0xFFFFFF);
-                txtCari.setWarna(0x000050, 0x000000, 0xDFDFDF, 0xFFFFFF, 0xCCCCCC, 0xD3D3D3, 0x000000);
+                lstResults.setWarna(0xD8D8D8, 0xFFFFFF, 0x8C8C8C, 0xE5E5E5, 0x727272, 0x0C0C0C);
+                txtCari.setWarna(0x000050, 0x000000, 0xDFDFDF, 0xFFFFFF);
                 clLatar = 0x000000; clQLine1=0xE5E5E5; clQLine2=0xD8D8D8; clQFIll = 0xD2D2D2;
                 
-                deg = (resMode>1) ? 0x000000 : 0x333333;
-                
-                menubox.setWarna(0x333333, deg, 0xFFFFFF, 0x262626, 0x3F3F3F);
-                menuboxDict.setWarna(0x333333, deg, 0xFFFFFF, 0x333333, 0xFFFFFF);
-                fontbox.setWarna(0x333333, deg, 0xFFFFFF);
+                menubox.setWarna(0x515151);
+                menuboxDict.setWarna(0x515151);
+                fontbox.setWarna(0x515151, deg, 0xFFFFFF);
                 break;
         }
 
@@ -312,19 +307,24 @@ public class KanvasCari extends Canvas implements CommandListener {
         int hQuick = getHeight() - yQuick; 
         
         g.setColor(clQFIll);
-        g.fillRect (0, yQuick, getWidth(), hQuick);
+        g.fillRect (3, yQuick, getWidth()-6, hQuick);
 
         g.setColor(clQLine1);
-        g.fillRect(0, yQuick, getWidth(), 1);
+        g.drawRect(2, yQuick, getWidth()-5, hQuick);
         
-        for (int i=0; i<3; i++)
-            g.drawRect((getWidth()/2 - 6)+(6*i), yQuick+3, 1, 1);
+        
+        for (int i=0; i<3; i++){
+            g.setColor(clQLine1);
+            g.drawRect((getWidth()/2 - 6)+(6*i), yQuick+2, 1, 1);
+            g.setColor(clQLine2);
+            g.drawRect((getWidth()/2 - 6)+(6*i)+1, yQuick+3, 0, 0);
+        }
         
         g.setColor(clQLine2);
-        g.fillRect(0, yQuick+1, getWidth(), 1);
+        g.fillRect(3, yQuick+1, getWidth()-6, 1);
         
-        g.setColor(0xBDCCBD);
-        g.fillRect(0, yQuick+6, getWidth(), 1);
+        g.setColor(clQLine2);
+        g.fillRect(3, yQuick+5, getWidth()-6, 1);
         
         tulisQuick(g);
     }
@@ -449,7 +449,7 @@ public class KanvasCari extends Canvas implements CommandListener {
                         break;
                     case 3:
                         commandMode(CMD_CLEAR);
-                        Display.getDisplay(midlet).setCurrent(midlet.pMenu);
+                        Display.getDisplay(midlet).setCurrent(midlet.pMenu.lsMenu);
                 }
                 
                 bMenu = false;

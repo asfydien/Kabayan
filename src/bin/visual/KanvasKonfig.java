@@ -17,17 +17,9 @@
 
 package bin.visual;
 
-import javax.microedition.lcdui.Canvas;
-import javax.microedition.lcdui.Command;
-import javax.microedition.lcdui.CommandListener;
-import javax.microedition.lcdui.Display;
-import javax.microedition.lcdui.Displayable;
-import javax.microedition.lcdui.Font;
-import javax.microedition.lcdui.Graphics;
-import javax.microedition.lcdui.Image;
-import bin.logic.Keyboard;
 import bin.logic.Kabayan;
-//import javax.microedition.io.StreamConnection;
+import bin.logic.Keyboard;
+import javax.microedition.lcdui.*;
 import javax.microedition.lcdui.game.Sprite;
 
 public class KanvasKonfig extends Canvas implements CommandListener{
@@ -120,15 +112,15 @@ public class KanvasKonfig extends Canvas implements CommandListener{
         
         switch (index){
             case 0:
-                list.setWarna(0x31664B, 0x285940, 0xB8D8B9, 0x4F9437, 0xC5E5C5, 0xF4FCF4, 0x4F9437);
+                list.setWarna(0x31664B, 0x285940, 0xB8D8B9, 0x4F9437, 0xC5E5C5, 0xF4FCF4);
                 setWarna(0xFFFFFF, 0x0C602F, 0x0A5429, 0xB8D8B9, 0xA3CCA4, 0x0D6632, 0x0A5429, 0xDDDDDD, 0xEFEFEF, 0xFAFFF2, 0xCDE8CE);
                 break;
             case 1:
-                list.setWarna(0x00003F, 0x000066, 0xCCCCFF, 0x7F7FFF, 0xD8D8FF, 0xEDEDFF, 0x7F7FFF);
+                list.setWarna(0x00003F, 0x000066, 0xCCCCFF, 0x7F7FFF, 0xD8D8FF, 0xEDEDFF);
                 setWarna(0xEDEDFF, 0x3352CE, 0x1F4CA5, 0x7780E5, 0x6A72CC, 0x3656D8, 0x23388C, 0xDDDDDD, 0xEFEFEF, 0xF2F2FF, 0x828CFF);
                 break;
             case 2:
-                list.setWarna(0xD8D8D8, 0xFFFFFF, 0x8C8C8C, 0xD2D2D2, 0x848484, 0x3C3C3C, 0xFFFFFF);
+                list.setWarna(0xD8D8D8, 0xFFFFFF, 0x8C8C8C, 0xD2D2D2, 0x848484, 0x3C3C3C);
                 setWarna(0x000000, 0xF2F2F2, 0xFFFFFF, 0xA5A5A5, 0xB2B2B2, 0xE5E5E5, 0x0C0C0C, 0x2B2D2B, 0x343834, 0x333333, 0x000000);
                 break;
         }
@@ -237,7 +229,7 @@ public class KanvasKonfig extends Canvas implements CommandListener{
         }
         
         if (c == cmdKembali){ 
-            Display.getDisplay(midlet).setCurrent(midlet.pMenu);
+            Display.getDisplay(midlet).setCurrent(midlet.pMenu.lsMenu);
         }
     }
     

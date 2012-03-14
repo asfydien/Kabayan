@@ -18,20 +18,16 @@
 
 package bin.visual;
 
+import bin.logic.Keyboard;
 import javax.microedition.lcdui.Canvas;
 import javax.microedition.lcdui.Font;
 import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.Image;
-import bin.logic.Keyboard;
 
 public class DTextField extends DControl {
     
     
     private StringBuffer contenido;  //Contenido del textBox
-    //private String contenidoMostrado;
-    //private int x, y; //Posici�n del text box
-    //private int ancho, alto; //Tama�o del textbox
-    //private boolean focus; //indicara si el control esta seleccionado
     private Font huruf; //fuente del textbox
     private int cursorPos; //Posicion del cursor en el texto
     private int cpos; //Posicion fisica del cursor
@@ -43,18 +39,13 @@ public class DTextField extends DControl {
     
     private boolean bCursor = true;
     
-    private int clCursorAct; 
-    private int clTeks, clCursor, clFill, clBorder, clShadow1, clShadow2, clShadow3;
+    private int clTeks, clCursor, clFill, clBorder;
     
-    public void setWarna(int clTeks, int clCursor, int clFill, int clBorder, int clShadow1, int clShadow2, int clShadow3){
+    public void setWarna(int clTeks, int clCursor, int clFill, int clBorder){
         this.clTeks = clTeks;
         this.clCursor = clCursor;
         this.clFill = clFill;
         this.clBorder = clBorder;
-        this.clShadow1 = clShadow1;
-        this.clShadow2 = clShadow2;
-        this.clShadow3 = clShadow3;
-        this.clCursorAct = clCursor;
     }
     
     public DTextField(String isi, String[] keyboard, int x, int y, int lebar, int tinggi, int fontSize ) {
@@ -74,19 +65,7 @@ public class DTextField extends DControl {
             imgTeks = Image.createImage("/img/paluruh.png"); 
         } catch (java.io.IOException e) { }
         
-        setWarna(0x800000, 0x000000,0xDFDFDF, 0x8C8C8C, 0xCCCCCC, 0xD3D3D3, 0xF2F2F2);
-    }
-    
-    public void switchCursor(){
-        bCursor = !bCursor;
-        setCursor(bCursor);
-    }
-    
-    public void setCursor(boolean b){
-        if (bCursor)
-            clCursorAct = clCursor;
-        else
-            clCursorAct = clFill;
+        setWarna(0x800000, 0x000000, 0xDFDFDF, 0x8C8C8C);
     }
     
     public void setFontSize(int fontSize){
@@ -117,11 +96,11 @@ public class DTextField extends DControl {
 //-- dibujo el fondo del textfield
         g.setColor(clFill);  // <# warna dasar
         g.fillRect(x, y, width, height);
-        g.setColor(clShadow1); // <# warna bayangan1 di jero boorder text entry
+        g.setColor(0xCCCCCC); // <# warna bayangan1 di jero boorder text entry
         g.drawLine(x, y+1, width+1, y+1);
-        g.setColor(clShadow2); // <# warna bayangan2 di jero boorder text entry
+        g.setColor(0xD3D3D3); // <# warna bayangan2 di jero boorder text entry
         g.drawLine(x, y+2, width+1, y+2);
-        g.setColor(clShadow3); // <# warna bayangan1 di luar boorder text entry
+        g.setColor(0xF2F2F2); // <# warna bayangan1 di luar boorder text entry
         g.drawLine(x, y+height+1, width+2, y+height+1);
         g.setColor(clBorder); // <# warna boorder text entry
         g.drawRect(x, y, width, height);
@@ -130,19 +109,14 @@ public class DTextField extends DControl {
         // tambah gambar di textfield, lamun aya
         try {
             int yImg = (height - imgTeks.getHeight()) / 2;
-              //g.drawImage(imgTeks, g.getClipWidth()- 16, y + ((alto-12)/2) , Graphics.LEFT | Graphics.TOP); 
             g.drawImage(imgTeks, (x+width) - imgTeks.getWidth() - yImg, y + yImg + 1 , Graphics.LEFT | Graphics.TOP); 
         } catch (Exception ex) { }
         
         if (hasFocus()){
 //-- Dibujo el cursor
-            g.setColor(clCursorAct);
+            g.setColor(clCursor);
             g.drawLine(x+4+cpos, y + 2, x+4+cpos, y+height-2);
         }
-        
-//-- dibujo el borde del textbox
-        //g.setColor(128, 64, 0);
-        //g.drawRoundRect(x, y, ancho, alto, 3, 3);
         
 //-- Dibujo el texo en el textbox
         g.setColor(clTeks);
