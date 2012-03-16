@@ -92,19 +92,4 @@ public class Gradient {
         return (int)rgb[0] << 16 | (int)rgb[1] << 8 | (int)rgb[2];
     }
 
-    public static void drawBrightRect(Graphics g, int color, int x, int y, int w, int h){
-    
-        int c = h/2;
-        
-        g.setColor(color);
-        g.fillRect(x, y, w, h);
-        
-        for (int i=0; i<c; i++){
-            g.setColor(brightColor(c, i));
-            
-            g.fillRect(x, c-i, w, 1);
-            g.fillRect(x, c+i, w, 1);
-        }
-        
-    }
 }

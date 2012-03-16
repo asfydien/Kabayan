@@ -38,7 +38,7 @@ public class Config {
     DiskMan disk;
     String encoding;
     
-    private String[] tema = {"Default"};
+    private String[] themes = {"Default"};
             
     /** Creates a new instance of Config */
     public Config() {
@@ -50,7 +50,7 @@ public class Config {
         encoding = "UTF8";
        
         dicts = getDictionaries();
-        tema = getThemeList();
+        themes = getThemeList();
         
         //Comprueba que diccionario preferido del usuario sigue estando en el listado de diccionarios
         //Si sigue en el listado selecciono ese diccionario sino eligo el primero que vea
@@ -68,6 +68,7 @@ public class Config {
         
         setLanguage(disk.getData("language"));
         setKeyboard(disk.getData("keyboard"));
+        setTheme(disk.getData("tema"));
         init();
         
     }
@@ -330,36 +331,10 @@ public class Config {
         
     }
     
-    public void saveTema(String tema){
-        disk.setData("tema", tema);
-        setColorTheme();
-    }
-    
-    public String getSavedTema(){
-        return disk.getData("tema");
-    }
-    
-    public int getSavedTemaInt(){
-        int index = 0;
-        
-        for (int i=0; i<tema.length; i++){
-            if (tema[i].equals(disk.getData("tema"))){
-                index = i;
-                break;
-            }
-        }
-        
-        return index;
-    }
-    
-    public String[] getTheme(){
-        return tema;
-    }
-    
     public void saveZoom(int zoom){
         disk.setData("notefont", Integer.toString(zoom));
     }
-    
+        
     public int getZoom(){
         int fontSize = 0;
         
@@ -403,6 +378,32 @@ public class Config {
                       0xFFFFFF, 0x0C602F, 0x0A5429, 0xB8D8B9, 0xA3CCA4, 0x0D6632, 0x0A5429, 0xDDDDDD, 0xEFEFEF, 0xFAFFF2, 0xCDE8CE,  // config
                       0x31664B, 0x285940, 0xB8D8B9, 0x4F9437, 0xC5E5C5, 0xF4FCF4};    // list config
     
+    public void setTheme(String tema){
+        disk.setData("tema", tema);
+        loadColorTheme();
+    }
+    
+    public String getTheme(){
+        return disk.getData("tema");
+    }
+    
+    public int getTemaInt(){
+        int index = 0;
+        
+        for (int i=0; i<themes.length; i++){
+            if (themes[i].equals(disk.getData("tema"))){
+                index = i;
+                break;
+            }
+        }
+        
+        return index;
+    }
+    
+    public String[] getThemes(){
+        return themes;
+    }
+    
     public String[] getThemeList(){
         try {
             return getKeys("tema");
@@ -412,12 +413,12 @@ public class Config {
         return null;
     }
     
-    public int[] setColorTheme(){
+    public int[] loadColorTheme(){
         String[] warna = {};
         int[] iWarna;
         
         try {
-            warna = getValuesOfKey(getSavedTema(), "tema");
+            warna = getValuesOfKey(getTheme(), "tema");
             
             if (warna.length > 0){
                 iWarna = new int[warna.length];
@@ -426,6 +427,8 @@ public class Config {
                     iWarna[i] = Integer.valueOf(warna[i], 16).intValue();
 
                 arrColor = iWarna;
+            } else {
+                System.out.println("# theme tidak load");
             }
         
         } catch (Exception e) {

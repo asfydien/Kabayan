@@ -91,7 +91,7 @@ public class KanvasKonfig extends Canvas implements CommandListener{
         dictag   = midlet.cfg.getDictionariesTag();
         itemkey  = midlet.cfg.getKyeboards();
         itemlang = midlet.cfg.getLanguages();
-        itemtema = midlet.cfg.getTheme();
+        itemtema = midlet.cfg.getThemes();
          
         // set bahasa sakalian jeung tombol
         setBahasa();
@@ -119,26 +119,7 @@ public class KanvasKonfig extends Canvas implements CommandListener{
         setWarna(getCl(17), getCl(18), getCl(19), getCl(20), getCl(21), getCl(22), getCl(23), getCl(24), getCl(25), getCl(26), getCl(27));
         list.setWarna(getCl(28), getCl(29), getCl(30), getCl(31), getCl(32), getCl(33));
 
-        /*
-        switch (index){
-            case 0:
-                list.setWarna(0x31664B, 0x285940, 0xB8D8B9, 0x4F9437, 0xC5E5C5, 0xF4FCF4);
-                setWarna(0xFFFFFF, 0x0C602F, 0x0A5429, 0xB8D8B9, 0xA3CCA4, 0x0D6632, 0x0A5429, 0xDDDDDD, 0xEFEFEF, 0xFAFFF2, 0xCDE8CE);
-                break;
-            case 1:
-                list.setWarna(0x00003F, 0x000066, 0xCCCCFF, 0x7F7FFF, 0xD8D8FF, 0xEDEDFF);
-                setWarna(0xEDEDFF, 0x3352CE, 0x1F4CA5, 0x7780E5, 0x6A72CC, 0x3656D8, 0x23388C, 0xDDDDDD, 0xEFEFEF, 0xF2F2FF, 0x828CFF);
-                break;
-            case 2:
-                list.setWarna(0xD8D8D8, 0xFFFFFF, 0x8C8C8C, 0xD2D2D2, 0x848484, 0x3C3C3C);
-                setWarna(0x000000, 0xF2F2F2, 0xFFFFFF, 0xA5A5A5, 0xB2B2B2, 0xE5E5E5, 0x0C0C0C, 0x2B2D2B, 0x343834, 0x333333, 0x000000);
-                break;
-        }
-        * 
-        */
-        
         repaint();
-        
     }
     
     private void setBahasa(){
@@ -231,8 +212,8 @@ public class KanvasKonfig extends Canvas implements CommandListener{
                     setBahasa();
                     break;
                 case 3:
-                    midlet.cfg.setData("tema", list.getSelectedText());
-                    midlet.pMenu.setTema(midlet.cfg.getSavedTemaInt());
+                    midlet.cfg.setTheme(list.getSelectedText());
+                    midlet.pMenu.setTema(midlet.cfg.getTemaInt());
                     setTema();
                     break;
             }

@@ -18,11 +18,11 @@
 
 package bin.visual;
 
+import bin.logic.Kabayan;
 import bin.logic.Keyboard;
 import bin.logic.ThrdPencari;
-import javax.microedition.lcdui.*;
-import bin.logic.Kabayan;
 import java.util.Vector;
+import javax.microedition.lcdui.*;
 
 public class KanvasCari extends Canvas implements CommandListener {
     
@@ -37,8 +37,7 @@ public class KanvasCari extends Canvas implements CommandListener {
     
     private ThrdPencari pPencari;
     
-    private int clLatar = 0xFFFFFF;
-    private int clQLine1 = 0xFFFFFF, clQLine2 = 0x000000, clQFIll = 0xD2D2D2;
+    private int clLatar, clQLine1, clQLine2, clQFIll;
     
     private String[] menu = {"Ganti kamus", "Quick view", "Font Size", "Ke Menu utama"};
     private boolean bMenu = false, bDict = false, bFont = false, bQuick = false, bCmdLihat;
@@ -59,14 +58,12 @@ public class KanvasCari extends Canvas implements CommandListener {
     
     private long tick;
     
-    //private boolean bExtra=false;
     private int resMode = 1;
     
     public KanvasCari(Kabayan midlet) {
        this.midlet = midlet; 
        index_file = "";
        
-       //bExtra = getWidth() >= 176;
        resMode = midlet.cfg.getResMode(getWidth()); 
        // sesuiakeun font jang ukuran layar HP anu leuwih 240x..
        fontSizeMenu = (resMode>2) ? Font.SIZE_MEDIUM : Font.SIZE_SMALL;
@@ -80,7 +77,7 @@ public class KanvasCari extends Canvas implements CommandListener {
        
        yDList = txtCari.y + txtCari.height + 4;   // +4 jarak antara top ka txtcari + jarak txtcari ka list
        lstResults = new DList(2, yDList, getWidth()-5, getHeight() - yDList - 2, fontSize);   // -2 ameh teu antel teuing ka handap
-       //lstResults.setSeleccionable(true);
+
        if (resMode>2) lstResults.setExtraItemHeight(2);
        
        pPencari = new ThrdPencari(this, midlet.cfg.getIndexFile());
@@ -194,7 +191,6 @@ public class KanvasCari extends Canvas implements CommandListener {
     }
     
     private void setTema(){
-        //int deg = 0;
         
         clLatar  = getCl(0);
         clQLine1 = getCl(1);

@@ -88,27 +88,8 @@ public class KanvasNote extends Canvas  implements CommandListener {
     }
     
     private void setTema(){
+        fontbox.setWarna(midlet.cfg.getColor(14), midlet.cfg.getColor(14), 0xFFFFFF);
         setWarna(midlet.cfg.getColor(15), midlet.cfg.getColor(16));
-        /*
-        switch (index){
-            case 0:
-                setWarna(0xFFFFFF, 0x0C602F);
-                fontbox.setWarna(clHead, 0x02190A, clHeadTeks);
-                break;
-            case 1:
-                setWarna(0xFFFFFF, 0x0026D7);
-                fontbox.setWarna(0x2342B2, 0x112359, 0xFFFFFF);
-                break;
-            case 2:
-                setWarna(0xFFFFFF, 0x333333);
-                fontbox.setWarna(clHead, 0x000000, clHeadTeks);
-                break;
-        }
-        
-        repaint();
-        
-        * 
-        */
     }
     
     public void setTeksHead(String s){

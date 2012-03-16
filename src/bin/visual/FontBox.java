@@ -30,7 +30,7 @@ public class FontBox {
         private Font fontZoom;
         private int iZoom=0;
         private ImageBlend ib = new ImageBlend();
-        private Gradient grad =  new Gradient();
+        //private Gradient grad =  new Gradient();
         private Image imBlend=null;
         private boolean styler=false;
         
@@ -110,11 +110,11 @@ public class FontBox {
             
             //g.setColor(wLatar1);
             //g.fillRect(xZomm, yZoom, wZoom, hZoom);
-            if (styler)
+            //if (styler)
                 g.drawImage(imBlend, xZomm, yZoom, g.TOP | g.LEFT);
-            else{
-                grad.drawGradientRect(g, wLatar1, wLatar2, xZomm, yZoom, wZoom, hZoom, grad.VERTICAL);
-            }
+            //else{
+            //    grad.drawGradientRect(g, wLatar1, wLatar2, xZomm, yZoom, wZoom, hZoom, grad.VERTICAL);
+            //}
                 
                 
             g.setColor(wTeks);
