@@ -1,5 +1,5 @@
 /* 
- * Copyright (C) 2011 A. Sofyan Wahyudin
+ * Copyright (C) 2011-2012 A. Sofyan Wahyudin
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -109,9 +109,7 @@ public class KanvasKonfig extends Canvas implements CommandListener{
     }
     
     private int getCl(int i){
-        System.out.println("getCl " + i);
         return midlet.cfg.getColor(i);
-        
     }
     
     private void setTema(){

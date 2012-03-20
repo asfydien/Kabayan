@@ -4,6 +4,13 @@
  ---------------------------------
 
  Riwayat perubahan
+ 
+ Kabayan 0.1.7
+ + mengganti menu utama jadi list
+ + data warna tema sekarang tersimpan di file "tema"
+ + pemotong teks sudah dioptimalkan
+ * bahasa bawaan tidak sesuai
+ * ?
 
  Kabayan 0.1.6
  - Improved DList

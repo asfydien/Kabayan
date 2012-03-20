@@ -1,5 +1,5 @@
 /* 
- * Copyright (C) 2011 A. Sofyan Wahyudin
+ * Copyright (C) 2011-2012 A. Sofyan Wahyudin
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -178,7 +178,6 @@ public class MenuBox {
             for (int i=0; i<20; i++){
                 g.setColor(grad.brightColor(cl, 0-i));
                 g.fillRect(0, 15-i, w, 1);
-                System.out.println("cl "+ Integer.toHexString(grad.brightColor(cl, 0-i)));
             }
         
         // dark

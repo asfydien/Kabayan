@@ -1,6 +1,6 @@
 /* 
  * Copyright (C) 2007 Aram Julhakyan
- * Copyright (C) 2010-2011 A. Sofyan Wahyudin
+ * Copyright (C) 2010-2012 A. Sofyan Wahyudin
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -36,7 +36,7 @@ public class Config {
     
     String language; // bahasa yang dipilih
     DiskMan disk;
-    String encoding;
+    String encoding = "UTF8";
     
     private String[] themes = {"Default"};
             
@@ -47,7 +47,6 @@ public class Config {
         selectedKeyboard = "";
         language = "";
         dictionary = disk.getData("dictionary");
-        encoding = "UTF8";
        
         dicts = getDictionaries();
         themes = getThemeList();
@@ -215,8 +214,8 @@ public class Config {
     
     private String[] getValuesOfKey(String key, String file) throws IOException{
         Vector v = new Vector (10, 3);
-        StringBuffer lectura = new StringBuffer(13);
-        StringBuffer lectura_valores = new StringBuffer(5);
+        StringBuffer read = new StringBuffer(13);
+        StringBuffer readValue = new StringBuffer(5);
         int ch = 0;
         boolean b = true;
         
@@ -231,45 +230,89 @@ public class Config {
         
         while ((ch = ir.read()) > -1){
             if (ch=='\n'){
-                if (lectura.toString().compareTo(key)==0)
+                if (read.toString().compareTo(key)==0)
                     break;
+                
                 b = true;
-                lectura.setLength(0);
+                read.setLength(0);
             }else{
                 if (ch=='#'){
                     b = false;
                 }else{
-                    if (b==false){ // Empieza la informacion para el array de teclados
-                        if (lectura.toString().compareTo(key)==0){
+                    if (b==false){ 
+                        if (read.toString().compareTo(key)==0){
 
                             if (ch=='|'){
-                                v.addElement(lectura_valores.toString());
-                                lectura_valores.setLength(0);
+                                v.addElement(readValue.toString());
+                                readValue.setLength(0);
                             }else
-                                lectura_valores.append((char) ch);
+                                readValue.append((char) ch);
                             
                         }
                     }
                 }
-                if (b==true)
-                    lectura.append((char)ch);
+        
+                if (b==true) read.append((char)ch);
             }
         }
         
-        if (lectura_valores.length() > 0)
-                v.addElement(lectura_valores.toString());
+        if (readValue.length() > 0) v.addElement(readValue.toString());
+        
         ir.close();
-        String salida[] = new String[v.size()];
+        
+        String ret[] = new String[v.size()];
         for(int i=0; i<v.size(); i++){
-            salida[i] = (String) v.elementAt(i);
+            ret[i] = (String) v.elementAt(i);
             
-            if (salida[i].indexOf("|") != -1)
-                salida[i] = salida[i].substring(0, salida[i].indexOf("|"));
+            if (ret[i].indexOf("|") != -1)
+                ret[i] = ret[i].substring(0, ret[i].indexOf("|"));
         }
         
+        return ret;
+    
+    }
+
+    public String getMetaManifest(String key) throws IOException{
+        StringBuffer read = new StringBuffer(13);
+        StringBuffer readVlue = new StringBuffer(5);
+        int ch = 0;
+        boolean b = true;
+
+        InputStream is = this.getClass().getResourceAsStream("/META-INF/MANIFEST.MF");
+        InputStreamReader ir;
+
+        try {
+            ir = new InputStreamReader(is, encoding);
+        } catch (UnsupportedEncodingException ex) {
+            ir = new InputStreamReader(is, "UTF-8");
+        }
+
+        while ((ch = ir.read()) > -1){
+
+            if (ch=='\n'){
+                if (read.toString().compareTo(key)==0) break;
+
+                b = true;
+
+                read.setLength(0);
+            }else{
+                if (ch==':'){
+                    b = false;
+                }else{
+                    if (b==false){
+                        if (read.toString().compareTo(key)==0)
+                            readVlue.append((char) ch);
+                    }
+                }
+
+                if (b==true) read.append((char)ch);
+
+            }
+        }
+
+        ir.close();
         
-        
-        return salida;
+        return readVlue.toString().trim();
     }
     
     /**
@@ -428,7 +471,7 @@ public class Config {
 
                 arrColor = iWarna;
             } else {
-                System.out.println("# theme tidak load");
+                System.out.println("# theme teu load");
             }
         
         } catch (Exception e) {

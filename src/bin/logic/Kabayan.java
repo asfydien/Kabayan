@@ -1,5 +1,5 @@
 /* 
- * Copyright (C) 2010-2011 A. Sofyan Wahyudin
+ * Copyright (C) 2010-2012 A. Sofyan Wahyudin
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -25,14 +25,9 @@ import javax.microedition.midlet.MIDlet;
 
 public class Kabayan extends MIDlet {
     public KanvasCari pPencarian;
-    //public KanvasMenu pMenu;
     public Golodog pMenu;
     public Config cfg;
-    //public KanvasTranslate pTranslate;
     private Display layar;
-    
-    public String NAMEVERSION = "Kabayan 0.1.7";
-    public String LABELBOTTOM = "- hurip sunda -";
     
     public Kabayan(){
         
@@ -40,7 +35,6 @@ public class Kabayan extends MIDlet {
         layar = Display.getDisplay(this);
         pPencarian = new KanvasCari(this);
         pMenu = new Golodog(this);
-       // pTranslate = new KanvasTranslate(this);
 
     }
     public void startApp() {
