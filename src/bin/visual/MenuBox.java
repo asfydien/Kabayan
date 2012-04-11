@@ -199,10 +199,11 @@ public class MenuBox {
             g.drawRect((wScreen/2 - 5)+(6*i), 4, 0, 0);
         
         // gradasi bawah
+        int hG = h/4;
         if (getResMode()>=2)
-            for (int i=0; i<35; i++){
+            for (int i=0; i<hG; i++){
                 g.setColor(grad.brightColor(cl, 0-i));
-                g.fillRect(0, (h-35)+i, w, 1);
+                g.fillRect(0, (h-(hG*2))+(i*2), w, 2);
             }
         
         // 
