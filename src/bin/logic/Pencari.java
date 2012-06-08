@@ -129,34 +129,61 @@ public class Pencari {
         if (s!=null | s.equals("")==false) {
             int mulai = getStartIdx(s);
 
-            boolean second = false;  // kedua
-            for (int i = mulai; i < index.length; i++){
-                //System.out.println(index[i][0] + " - " + index[i][1] + " - " + index[i][2]);
-                ini = index[i][0];
-                if (ini.length()>s.length()){
-                    ini = ini.substring(0, s.length());
-                }
-                if ( (s.compareTo(ini)>=0 ) && ( s.compareTo(index[i][1])<=0) ){
-
-                    try {
-                        if (second == false){  // kedua
-                            r1 = search(s, index[i][2], MAX_RECORDS);
-                            second = true;
-                            if (r1.length == MAX_RECORDS)
-                                return r1;
-                        }else{
-                            if (r1 !=null){
-                                r2 = search(s, index[i][2], MAX_RECORDS - r1.length);
-                               return join(r1, r2); 
+            if (s.indexOf(" ")>0){
+                String[] sa = split(s, " ");
+                Vector words = new Vector();
+                
+                for (int i=0; i<sa.length; i++){
+                    for (int j = mulai; j < index.length; j++)
+                        if ( (sa[i].compareTo(index[j][0])>=0 ) && (sa[i].compareTo(index[j][1]) <= 0 ) ){
+                            try {
+                                words.addElement(search(sa[i], index[j][2], 1)[0]);
+                            } catch (IOException ex) {
+                                //ex.printStackTrace();
                             }
+                            
                         }
-                        //return search(s, index[i][2]);
-                    } catch (IOException ex) {
-                        //ex.printStackTrace();
-                    }
                 }
+                
+                r1 = new String[words.size()];
+                for(int i=0; i<words.size(); i++)
+                    r1[i] = (String) words.elementAt(i);
+                
+                
+            } else {
+               
+                boolean second = false;  // kedua
+                for (int i = mulai; i < index.length; i++){
+                    //System.out.println(index[i][0] + " - " + index[i][1] + " - " + index[i][2]);
+                    ini = index[i][0];
+                    if (ini.length()>s.length()){
+                        ini = ini.substring(0, s.length());
+                    }
+                    if ( (s.compareTo(ini)>=0 ) && ( s.compareTo(index[i][1])<=0) ){
+
+                        try {
+                            if (second == false){  // kedua
+                                r1 = search(s, index[i][2], MAX_RECORDS);
+                                second = true;
+                                if (r1.length == MAX_RECORDS)
+                                    return r1;
+                            }else{
+                                if (r1 !=null){
+                                    r2 = search(s, index[i][2], MAX_RECORDS - r1.length);
+                                return join(r1, r2); 
+                                }
+                            }
+                            //return search(s, index[i][2]);
+                        } catch (IOException ex) {
+                            //ex.printStackTrace();
+                        }
+                    }
+                } // for
+                
+                
             }
         }
+        
         return r1;
     }
     
@@ -280,5 +307,30 @@ public class Pencari {
         return null;
     }
     
-   
+    private String[] split(String s, String separator) {
+        Vector nodes = new Vector();
+        // Parse nodes into vector
+        int index = s.indexOf(separator);
+        while(index >= 0) {
+            nodes.addElement( s.substring(0, index) );
+            s = s.substring(index+separator.length());
+            index = s.indexOf(separator);
+        }
+        // Get the last node
+        nodes.addElement( s );
+
+        // Create split string array
+        String[] result = new String[ nodes.size() ];
+        if( nodes.size() > 0 ) {
+            for(int loop = 0; loop < nodes.size(); loop++)
+            {
+                result[loop] = (String)nodes.elementAt(loop);
+                System.out.println(result[loop]);
+            }
+
+        }
+        return result;
+    }
+
+    
 }
