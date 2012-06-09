@@ -29,7 +29,7 @@ public class Config {
     String dictionary;
     
     String selectedKeyboard;
-    String[] keys = {". -_@", "abc", "defé", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"}; // <# key anu tiasa digunakeun, pake sunda aksen (é)
+    String[] keys = {" .-_@", "abc", "defé", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"}; // <# key anu tiasa digunakeun, pake sunda aksen (é)
     String[] words = {"Cari Kata", "Daftar Kamus", "Keluar", "Bantuan", "Tombol", "Kembali", "Setuju", "Tidak Ditemukan", "Bahasa", 
                       "Ihwal", "Lihat", "OK", "Batal", "Pilih", "Tutup", "Konfigurasi", "Tema", "Ganti Kamus", "Ke Menu Utama", "Kecil", "Sedang", "Besar", "Translate*",
                       "Menu Utama:\\n(2) Naik, (8) Turun, (5) Pilih\\n\nPencarian:\\n(*) Hapus, (0) Naik, (\u0023) Turun"};

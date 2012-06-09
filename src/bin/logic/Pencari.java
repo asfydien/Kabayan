@@ -109,35 +109,40 @@ public class Pencari {
     
     private int getStartIdx(String s){
 
-        int ic = (int)s.charAt(0); 
+        try {
+            int ic = (int)s.charAt(0); 
             
-        if (ic>=65 & ic<=122){
-            //System.out.println("start "+ idx[ic-65]);
-            return  idx[ic-65];
+            if (ic>=65 & ic<=122){
+                //System.out.println("start "+ idx[ic-65]);
+                return  idx[ic-65];
+            }
+        } catch (Exception ex) {
+            return 0;
         }
-            
+        
         return 0;
     }
     
     public String[] startSearch(String s){  // memulai search
         
-        
         String ini="";
         String[] r1 = null;
         String[] r2 = null;
         
+        int mulai = getStartIdx(s);
+        
         if (s!=null | s.equals("")==false) {
-            int mulai = getStartIdx(s);
-
-            if (s.indexOf(" ")>0){
-                String[] sa = split(s, " ");
+            
+            if (s.indexOf(" ")!=-1){
+                String[] sPart = split(s, " ");
                 Vector words = new Vector();
                 
-                for (int i=0; i<sa.length; i++){
+                for (int i=0; i<sPart.length; i++){
+                    mulai = getStartIdx(sPart[i]);
                     for (int j = mulai; j < index.length; j++)
-                        if ( (sa[i].compareTo(index[j][0])>=0 ) && (sa[i].compareTo(index[j][1]) <= 0 ) ){
+                        if ( (sPart[i].compareTo(index[j][0])>=0 ) && (sPart[i].compareTo(index[j][1]) <= 0 ) ){
                             try {
-                                words.addElement(search(sa[i], index[j][2], 1)[0]);
+                                words.addElement(singleSearch(sPart[i], index[j][2]));
                             } catch (IOException ex) {
                                 //ex.printStackTrace();
                             }
@@ -148,7 +153,6 @@ public class Pencari {
                 r1 = new String[words.size()];
                 for(int i=0; i<words.size(); i++)
                     r1[i] = (String) words.elementAt(i);
-                
                 
             } else {
                
@@ -237,6 +241,45 @@ public class Pencari {
             wrds[i] = (String) words.elementAt(i);
         
         return wrds;
+    }
+    
+    public String singleSearch(String word, String file) throws  IOException{
+        
+        String dic_file = idx_file + "x" + file;
+        InputStream is = this.getClass().getResourceAsStream("/dic/" + dic_file); // <# lokasi kamus
+        StringBuffer reading = new StringBuffer();
+        boolean wordOrder = false;
+        int ch=0;
+        String ret="";
+        
+        InputStreamReader ir;
+        try {
+            ir = new InputStreamReader(is, encoding);
+        } catch (UnsupportedEncodingException ex) {
+            ir = new InputStreamReader(is, "UTF-8");
+        }
+        
+        while ((ch = ir.read()) > -1) {
+            if (ch=='\n'){  // akhir baris
+                reading.setLength(0);
+                wordOrder = false;
+            }else{
+                if (ch != '#' && wordOrder == false){
+                    reading.append((char)ch);
+                }else{
+                    wordOrder = true;
+                    if (reading.length() >= word.length())
+                        if (word.compareTo(reading.toString().substring(0, word.length())) == 0){
+                            ret = reading.toString();
+                            break;
+                        }
+                }
+            }
+        }         
+        
+        is.close();
+        
+        return ret;
     }
     
     // <# maluruh hartina

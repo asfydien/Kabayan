@@ -108,9 +108,10 @@ public class FontBox {
             xZomm = (g.getClipWidth()/2) - (wZoom/2);
             yZoom = g.getClipHeight() - hZoom - 10; 
             
-            //g.setColor(wLatar1);
-            //g.fillRect(xZomm, yZoom, wZoom, hZoom);
-            //if (styler)
+            g.setColor(wLatar1);
+            g.fillRect(xZomm, yZoom, wZoom, hZoom);
+            
+            if (styler)
                 g.drawImage(imBlend, xZomm, yZoom, g.TOP | g.LEFT);
             //else{
             //    grad.drawGradientRect(g, wLatar1, wLatar2, xZomm, yZoom, wZoom, hZoom, grad.VERTICAL);
