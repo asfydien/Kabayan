@@ -117,7 +117,7 @@ public class Pencari {
                 return  idx[ic-65];
             }
         } catch (Exception ex) {
-            return 0;
+            //return 0;
         }
         
         return 0;
@@ -132,8 +132,37 @@ public class Pencari {
         int mulai = getStartIdx(s);
         
         if (s!=null | s.equals("")==false) {
-            
-            if (s.indexOf(" ")!=-1){
+              
+            boolean second = false;  // kedua
+            for (int i = mulai; i < index.length; i++){
+                //System.out.println(index[i][0] + " - " + index[i][1] + " - " + index[i][2]);
+                ini = index[i][0];
+                if (ini.length()>s.length()){
+                    ini = ini.substring(0, s.length());
+                }
+                if ( (s.compareTo(ini)>=0 ) && ( s.compareTo(index[i][1])<=0) ){
+
+                    try {
+                        if (second == false){  // kedua
+                            r1 = search(s, index[i][2], MAX_RECORDS);
+                            second = true;
+                            if (r1.length == MAX_RECORDS)
+                                return r1;
+                        }else{
+                            if (r1 !=null){
+                                r2 = search(s, index[i][2], MAX_RECORDS - r1.length);
+                            return join(r1, r2); 
+                            }
+                        }
+                        //return search(s, index[i][2]);
+                    } catch (IOException ex) {
+                        //ex.printStackTrace();
+                    }
+                }
+            } // for
+            System.out.println(r1.length);
+            // jika result nihil, chek apakan input lebih dari dua kata lalu cari masing2 kata
+            if (r1.length==0 && s.indexOf(" ")!=-1){
                 String[] sPart = split(s, " ");
                 Vector words = new Vector();
                 
@@ -142,7 +171,12 @@ public class Pencari {
                     for (int j = mulai; j < index.length; j++)
                         if ( (sPart[i].compareTo(index[j][0])>=0 ) && (sPart[i].compareTo(index[j][1]) <= 0 ) ){
                             try {
-                                words.addElement(singleSearch(sPart[i], index[j][2]));
+                                String ret = "";
+                                ret = singleSearch(sPart[i], index[j][2]);
+                                
+                                if (ret!=null & ret.trim().length()>0)
+                                    words.addElement(ret);
+                                
                             } catch (IOException ex) {
                                 //ex.printStackTrace();
                             }
@@ -154,38 +188,8 @@ public class Pencari {
                 for(int i=0; i<words.size(); i++)
                     r1[i] = (String) words.elementAt(i);
                 
-            } else {
-               
-                boolean second = false;  // kedua
-                for (int i = mulai; i < index.length; i++){
-                    //System.out.println(index[i][0] + " - " + index[i][1] + " - " + index[i][2]);
-                    ini = index[i][0];
-                    if (ini.length()>s.length()){
-                        ini = ini.substring(0, s.length());
-                    }
-                    if ( (s.compareTo(ini)>=0 ) && ( s.compareTo(index[i][1])<=0) ){
-
-                        try {
-                            if (second == false){  // kedua
-                                r1 = search(s, index[i][2], MAX_RECORDS);
-                                second = true;
-                                if (r1.length == MAX_RECORDS)
-                                    return r1;
-                            }else{
-                                if (r1 !=null){
-                                    r2 = search(s, index[i][2], MAX_RECORDS - r1.length);
-                                return join(r1, r2); 
-                                }
-                            }
-                            //return search(s, index[i][2]);
-                        } catch (IOException ex) {
-                            //ex.printStackTrace();
-                        }
-                    }
-                } // for
-                
-                
             }
+                
         }
         
         return r1;
