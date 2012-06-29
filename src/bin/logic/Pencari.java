@@ -160,9 +160,9 @@ public class Pencari {
                     }
                 }
             } // for
-            System.out.println(r1.length);
+            
             // jika result nihil, chek apakan input lebih dari dua kata lalu cari masing2 kata
-            if (r1.length==0 && s.indexOf(" ")!=-1){
+            if ((r1==null || r1.length==0) && s.indexOf(" ")!=-1){
                 String[] sPart = split(s, " ");
                 Vector words = new Vector();
                 
@@ -189,7 +189,7 @@ public class Pencari {
                     r1[i] = (String) words.elementAt(i);
                 
             }
-                
+               
         }
         
         return r1;
